@@ -12,6 +12,10 @@ struct RatatouilleApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            
+            VStack {
+                Text("hello")
+            }
         }
     }
 }
