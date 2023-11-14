@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @State private var showGreeting = true
+    
     var body: some View {
         
         
@@ -15,19 +18,26 @@ struct SettingsView: View {
             VStack {
                 List{
                     Section(header: Text("Section 1")) {
-                        SettingsRowView(title: "Redigere landområder", systemImageName: "info.circle")
-                        SettingsRowView(title: "Redigere kategorier", systemImageName: "info.circle")
+                        SettingsRowView(type:.click, title: "Redigere landområder", systemImageName: "info.circle")
+                        SettingsRowView(type:.click, title: "Redigere kategorier", systemImageName: "info.circle")
                         
-                        SettingsRowView(title: "Redigere ingredienser", systemImageName: "info.circle")
+                        SettingsRowView(type:.click, title: "Redigere ingredienser", systemImageName: "info.circle")
                     }
                     
                     Section(header: Text("Section 2")) {
-                        SettingsRowView(title: "Aktiver mørk modus", systemImageName: "info.circle")
+                        SettingsRowView(type: .toggle, title: "Aktiver mørk modus", systemImageName: "info.circle")
                     }
                     
                     Section(header: Text("Section 3")) {
-                        SettingsRowView(title: "Administrere arkiv", systemImageName: "info.circle")
+                        SettingsRowView(type:.click, title: "Administrere arkiv", systemImageName: "info.circle")
                     }
+                
+                    Section(header: Text("Section 4")) {
+                        Toggle("hello", isOn: $showGreeting)
+                        if showGreeting { Text("hello show greeting")
+                        }
+                    }
+
                 }
             }
             
