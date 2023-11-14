@@ -13,12 +13,10 @@ struct SettingsView: View {
     
     var body: some View {
         
-        
         NavigationView {
             VStack {
                 List{
                     Section(header: Text("Section 1")) {
-                        
                         NavigationLink {
                             Text("Label 2")
                         } label: {
@@ -37,9 +35,6 @@ struct SettingsView: View {
                             SettingsRowView(type:.click, title: "Redigere ingredienser", systemImageName: "info.circle")
                         }
                     }
-                    
-                    
-                        
                     
                     Section(header: Text("Section 2")) {
                         SettingsRowView(type: .toggle, title: "Aktiver mørk modus", systemImageName: "info.circle")
