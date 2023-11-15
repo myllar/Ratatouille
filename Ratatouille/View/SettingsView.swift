@@ -9,43 +9,75 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State private var showGreeting = true
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    
     
     var body: some View {
         
         NavigationView {
             VStack {
                 List{
-                    Section(header: Text("Section 1")) {
-                        NavigationLink {
-                            Text("Label 2")
-                        } label: {
-                            SettingsRowView(type:.click, title: "Redigere landområder", systemImageName: "info.circle")
-                        }
-                      
-                        NavigationLink {
-                            Text("Label 2")
-                        } label: {
-                            SettingsRowView(type:.click, title: "Redigere kategorier", systemImageName: "info.circle")
-                        }
+//Section 1
+                    Section(header: Text("Redigere database")) {
+                        
+//                        NavigationLink {
+//                            Text("Label 2")
+//                        } label: {
+//                            SettingsRowView(type:.click, title: "Redigere landområder", systemImageName: "info.circle")
+//                        }
+//                    Section(header: Text("Section 2")) {
+//                        SettingsRowView(type: .toggle, title: "Aktiver mørk modus", systemImageName: isDarkMode ? "moon.circle" : "moon.circle.fill")
+//                            .preferredColorScheme(isDarkMode ? .dark : .light)
+//                        }
+//SettingsRowView(type: .toggle, title: "Aktiver mørk modus", systemImageName: isDarkMode ? "moon.circle" : "moon.circle.fill")
+//.preferredColorScheme(isDarkMode ? .dark : .light)
+                        
                         
                         NavigationLink {
-                            Text("Label 2")
+                            Text("Redigere landområder")
                         } label: {
-                            SettingsRowView(type:.click, title: "Redigere ingredienser", systemImageName: "info.circle")
+                            HStack{
+                                Image(systemName: "info.circle")
+                                Text("Redigere landområder")
+                            }
+                        }
+                            
+                        NavigationLink {
+                            Text("Redigere kategorier")
+                        } label: {
+                            HStack{
+                                Image(systemName: "info.circle")
+                                Text("Redigere kategorier")
+                            }
+                        }
+                            
+                        NavigationLink {
+                            Text("Redigere ingredienser")
+                        } label: {
+                            HStack{
+                                Image(systemName: "info.circle")
+                                Text("Redigere ingredienser")
+                            }
                         }
                     }
                     
-                    Section(header: Text("Section 2")) {
-                        SettingsRowView(type: .toggle, title: "Aktiver mørk modus", systemImageName: "info.circle")
+//Section 2
+                    Section(header: Text("System-instillinger")) {
+                        
+                        Toggle(isOn: $isDarkMode, label: {
+                            HStack{
+                                Image(systemName: isDarkMode ? "moon.circle.fill" : "moon.circle")
+                                Text("Aktiver mørk modus")
+                            }
+                            .preferredColorScheme(isDarkMode ? .dark : .light)
+                        })
                     }
-                    
+//Section 3
                     Section(header: Text("Section 3")) {
                         SettingsRowView(type:.click, title: "Administrere arkiv", systemImageName: "info.circle")
                     }
                 }
             }
-            
             .padding(.bottom)
             .navigationTitle("Innstillinger")
         }
