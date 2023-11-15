@@ -11,51 +11,38 @@ struct SettingsView: View {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     
-    
     var body: some View {
         
         NavigationView {
             VStack {
                 List{
 //Section 1
-                    Section(header: Text("Redigere database")) {
-                        
-//                        NavigationLink {
-//                            Text("Label 2")
-//                        } label: {
-//                            SettingsRowView(type:.click, title: "Redigere landområder", systemImageName: "info.circle")
-//                        }
-//                    Section(header: Text("Section 2")) {
-//                        SettingsRowView(type: .toggle, title: "Aktiver mørk modus", systemImageName: isDarkMode ? "moon.circle" : "moon.circle.fill")
-//                            .preferredColorScheme(isDarkMode ? .dark : .light)
-//                        }
-//SettingsRowView(type: .toggle, title: "Aktiver mørk modus", systemImageName: isDarkMode ? "moon.circle" : "moon.circle.fill")
-//.preferredColorScheme(isDarkMode ? .dark : .light)
-                        
-                        
+                    Section(header: Text("Redigere databasen (Endre innhold)")) {
+                                                
                         NavigationLink {
-                            Text("Redigere landområder")
+                            Text("siden form å Redigere landområder")
                         } label: {
                             HStack{
-                                Image(systemName: "info.circle")
+                                Image(systemName: "pencil")
                                 Text("Redigere landområder")
                             }
                         }
                             
                         NavigationLink {
-                            Text("Redigere kategorier")
+                            Text("siden form å Redigere kategorier")
                         } label: {
                             HStack{
-                                Image(systemName: "info.circle")
+                                Image(systemName: "pencil")
                                 Text("Redigere kategorier")
                             }
                         }
                             
                         NavigationLink {
-                            Text("Redigere ingredienser")
+                            Text("siden form å Redigere ingredienser")
+//                         e.g.   SearchView()
                         } label: {
                             HStack{
-                                Image(systemName: "info.circle")
+                                Image(systemName: "pencil")
                                 Text("Redigere ingredienser")
                             }
                         }
@@ -74,7 +61,14 @@ struct SettingsView: View {
                     }
 //Section 3
                     Section(header: Text("Section 3")) {
-                        SettingsRowView(type:.click, title: "Administrere arkiv", systemImageName: "info.circle")
+                    NavigationLink {
+                        Text("siden form å Administrere arkiv")
+                    } label: {
+                        HStack{
+                            Image(systemName: "info.circle")
+                            Text("Administrere arkiv")
+                            }
+                        }
                     }
                 }
             }
