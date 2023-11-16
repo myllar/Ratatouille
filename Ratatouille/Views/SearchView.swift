@@ -34,7 +34,7 @@ struct SearchView: View {
                     }
                 }
             }
-            .navigationTitle("Meals")
+            .navigationTitle("Søk")
         }
         
         .searchable(text: $searchText) {
