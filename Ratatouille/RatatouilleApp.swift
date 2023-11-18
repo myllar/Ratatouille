@@ -9,26 +9,30 @@ import SwiftUI
 
 @main
 struct RatatouilleApp: App {
+    
+    @AppStorage("isDarkMode") private var isDarkMode = false
+//    init() {
+//        if isDarkMode {
+//            isDarkMode ? .dark : .light
+//        } else {
+//        }
+//    }
+    
     var body: some Scene {
+        
+// ADD CHECK FOR DARKMODE = TRUE
+        
         WindowGroup {
-            Text("hello, this is the header! Image coming soon")
-            Text("hello, this is the header! Image coming soon")
-            Text("hello, this is the header! Image coming soon")
-
+            ZStack{
+                Text("hello, this is the header! HEROImage coming soon")
+                Text("hello, this is the header! HEROImage coming soon")
+                Text("hello, this is the header! HEROImage coming soon")
             
-            TabView {
+                BottomTabView()
                 
-                SearchView()
-                    .tabItem { Label("Søk", systemImage: "tray.and.arrow.up.fill") }
-
-
-                MyRecipesView()
-//                Text("Import MyRecipesView")
-                    .tabItem { Label("Mine oppskrifter", systemImage: "tray.and.arrow.up.fill") }
-            
-                SettingsView()
-                    .tabItem { Label("Innstillinger", systemImage: "tray.and.arrow.up.fill") }
             }
+            
         }
     }
 }
+
