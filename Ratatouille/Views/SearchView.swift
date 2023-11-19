@@ -144,7 +144,7 @@ struct APIController {
     static func getAllMeals(completion: @escaping ([MealItem]) -> Void){
         let apiURL = URL(string: 
 //        "https://www.themealdb.com/api/json/v1/1/search.php?s=Corba")!
-        "https://www.themealdb.com/api/json/v1/1/search.php?s=")!
+        "https://www.themealdb.com/api/json/v1/1/search.php?s=Taco")!
         
         Task {
             do {
@@ -218,7 +218,6 @@ struct SearchView: View {
                     category in Text(category).tag(category)
                 }
             }
-            
             
             VStack{
                 List (loadFilteredMeals, id: \.idMeal) { MealItem in
@@ -311,12 +310,9 @@ struct SearchView: View {
                             }
                         }
                         .foregroundColor(.brandPrimary)
-                            
-                        
                     }
                 }
             }
-            
             .navigationTitle("Søk")
         }
         .onAppear {
@@ -344,24 +340,6 @@ struct SearchView: View {
         UserDefaults.standard.set(Array(setFavorite), forKey: "savedFavoriteMeals")
     }
 }
-
-        
-
-
-//        NavigationStack {
-//            List () {
-//
-//                ForEach(searchedMeal, id: \.self) {
-//                    meal in NavigationLink {
-//                        Text(meal)
-//                    }label: {
-//                        Text(meal)
-//                    }
-//                }
-//            }
-//            .navigationTitle("Søk")
-//        }
-
 
 
 #Preview {
