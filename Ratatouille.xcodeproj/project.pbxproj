@@ -20,6 +20,9 @@
 		55E03CC92B069599006890C8 /* BottomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E03CC82B069599006890C8 /* BottomTabView.swift */; };
 		55E03CCD2B08AFA8006890C8 /* CRUDTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E03CCC2B08AFA8006890C8 /* CRUDTestView.swift */; };
 		55E03CCF2B08BF1B006890C8 /* MyFavoriteMeals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E03CCE2B08BF1B006890C8 /* MyFavoriteMeals.swift */; };
+		55E03CD82B0A8CF2006890C8 /* MealDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55E03CD62B0A8CF2006890C8 /* MealDataModel.xcdatamodeld */; };
+		55E03CFD2B0AA0A2006890C8 /* FavoriteMealData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E03CFB2B0AA0A2006890C8 /* FavoriteMealData+CoreDataClass.swift */; };
+		55E03CFE2B0AA0A2006890C8 /* FavoriteMealData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E03CFC2B0AA0A2006890C8 /* FavoriteMealData+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,9 @@
 		55E03CC82B069599006890C8 /* BottomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabView.swift; sourceTree = "<group>"; };
 		55E03CCC2B08AFA8006890C8 /* CRUDTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDTestView.swift; sourceTree = "<group>"; };
 		55E03CCE2B08BF1B006890C8 /* MyFavoriteMeals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoriteMeals.swift; sourceTree = "<group>"; };
+		55E03CD72B0A8CF2006890C8 /* MealCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MealCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		55E03CFB2B0AA0A2006890C8 /* FavoriteMealData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FavoriteMealData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		55E03CFC2B0AA0A2006890C8 /* FavoriteMealData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FavoriteMealData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +116,6 @@
 				55E03CC52B051D34006890C8 /* Models */,
 				55E03CAE2B02869F006890C8 /* Views */,
 				55E03C842B027EB7006890C8 /* RatatouilleApp.swift */,
-				55E03CC82B069599006890C8 /* BottomTabView.swift */,
 				55E03C882B027EB8006890C8 /* Assets.xcassets */,
 				55E03C8A2B027EB8006890C8 /* Preview Content */,
 			);
@@ -145,6 +150,7 @@
 		55E03CAE2B02869F006890C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				55E03CC82B069599006890C8 /* BottomTabView.swift */,
 				55E03CB82B028CE4006890C8 /* SearchView.swift */,
 				55E03CCE2B08BF1B006890C8 /* MyFavoriteMeals.swift */,
 				55E03CBA2B028D2C006890C8 /* SettingsView.swift */,
@@ -155,6 +161,9 @@
 		55E03CC52B051D34006890C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				55E03CFB2B0AA0A2006890C8 /* FavoriteMealData+CoreDataClass.swift */,
+				55E03CFC2B0AA0A2006890C8 /* FavoriteMealData+CoreDataProperties.swift */,
+				55E03CD62B0A8CF2006890C8 /* MealDataModel.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,10 +312,13 @@
 				55E03CBB2B028D2C006890C8 /* SettingsView.swift in Sources */,
 				55E03CB92B028CE4006890C8 /* SearchView.swift in Sources */,
 				55E03CCD2B08AFA8006890C8 /* CRUDTestView.swift in Sources */,
+				55E03CFD2B0AA0A2006890C8 /* FavoriteMealData+CoreDataClass.swift in Sources */,
 				55E03CBD2B036CC1006890C8 /* SettingsRowView.swift in Sources */,
 				55E03C872B027EB7006890C8 /* ContentView.swift in Sources */,
 				55E03CCF2B08BF1B006890C8 /* MyFavoriteMeals.swift in Sources */,
 				55E03C852B027EB7006890C8 /* RatatouilleApp.swift in Sources */,
+				55E03CFE2B0AA0A2006890C8 /* FavoriteMealData+CoreDataProperties.swift in Sources */,
+				55E03CD82B0A8CF2006890C8 /* MealDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +642,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		55E03CD62B0A8CF2006890C8 /* MealDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				55E03CD72B0A8CF2006890C8 /* MealCoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 55E03CD72B0A8CF2006890C8 /* MealCoreDataModel.xcdatamodel */;
+			path = MealDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 55E03C792B027EB7006890C8 /* Project object */;
 }

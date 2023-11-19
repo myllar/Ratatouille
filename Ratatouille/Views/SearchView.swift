@@ -55,30 +55,37 @@
 //    SearchView()
 //}
 
-
-
 // ---------------------------------------------------------------------------------
-
 
 import SwiftUI
 
 
+// ---------------------------------------------- MEAL MODEL
+
+import UIKit
 
 
 
 // ---------------------------------------------- MEAL MODEL
-struct MealItem: Decodable, Identifiable {
+
+
+// ---------------------------------------------- MEAL MODEL
+struct MealItem: Codable, Identifiable {
     let idMeal: String
     let strMeal: String
     let strArea: String
     let strCategory: String
     let strInstructions: String
     let strMealThumb: String
-    let ingredient: [(name: String, measure: String)]?
+    let strIngredient: String
+    let strMeasure: String
+    
+//    let ingredient: [(name: String, measure: String)]?
     
     
     //  ENABLE IDENTIFIABLE
     var id: String { idMeal}
+//    let idMeal = UUID()
     
     
     // POSSIBLE TO SHORTHAND? ..."strIngredient\($)"
@@ -91,8 +98,11 @@ struct MealItem: Decodable, Identifiable {
         case strCategory
         case strInstructions
         case strMealThumb
-        case strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strIngredient16, strIngredient17, strIngredient18, strIngredient19, strIngredient20
-        case strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5, strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10, strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15, strMeasure16, strMeasure17, strMeasure18, strMeasure19, strMeasure20
+        case strIngredient
+        case strMeasure
+        
+//        case strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strIngredient16, strIngredient17, strIngredient18, strIngredient19, strIngredient20
+//        case strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5, strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10, strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15, strMeasure16, strMeasure17, strMeasure18, strMeasure19, strMeasure20
     }
     
     
@@ -108,33 +118,34 @@ struct MealItem: Decodable, Identifiable {
         strInstructions = try mealItemContainer.decode(String.self, forKey: .strInstructions)
         strMealThumb = try mealItemContainer.decode(String.self, forKey: .strMealThumb)
         
-        ingredient = (1...20).compactMap { index in guard
-            let name = try? mealItemContainer.decodeIfPresent(String.self, forKey: CodingKeys(rawValue: "strIngredient\(index)")!),
-            let measure = try? mealItemContainer.decodeIfPresent(String.self, forKey: CodingKeys(rawValue: "strMeasure\(index)")!),
-            !name.isEmpty, !measure.isEmpty
-            else {
-            return nil
-        }
-            return (name, measure)
-        }
+        strIngredient = try mealItemContainer.decode(String.self, forKey: .strIngredient)
+        strMeasure = try mealItemContainer.decode(String.self, forKey: .strMeasure)
         
+        
+//        ingredient = (1...20).compactMap { index in guard
+//            let name = try? mealItemContainer.decodeIfPresent(String.self, forKey: CodingKeys(rawValue: "strIngredient\(index)")!),
+//            let measure = try? mealItemContainer.decodeIfPresent(String.self, forKey: CodingKeys(rawValue: "strMeasure\(index)")!),
+//            !name.isEmpty, !measure.isEmpty
+//            else {
+//            return nil
+//        }
+//            return (name, measure)
+//        }
     }
 }
 
 
     //  EDIT PRESENTATION OF INGREDIENT+MEASURE
     
-    extension MealItem {
-        func measuredIngredient() -> String {
-            return ingredient?.map {
-                "\($0.name) (\($0.measure)"
-            }.joined(separator: ", ") ?? ""
-        }
-    }
+//    extension MealItem {
+//        func measuredIngredient() -> String {
+//            return ingredient?.map {
+//                "\($0.name) (\($0.measure)"
+//            }.joined(separator: ", ") ?? ""
+//        }
+//    }
 
 
-
-    
 // ---------------------------------------------- END OF MEAL MODEL
     
 // ---------------------------------------------- MEAL API
@@ -143,8 +154,8 @@ struct MealItem: Decodable, Identifiable {
 struct APIController {
     static func getAllMeals(completion: @escaping ([MealItem]) -> Void){
         let apiURL = URL(string: 
-//        "https://www.themealdb.com/api/json/v1/1/search.php?s=Corba")!
         "https://www.themealdb.com/api/json/v1/1/search.php?s=Taco")!
+//        "https://www.themealdb.com/api/json/v1/1/search.php?s=")!
         
         Task {
             do {
@@ -226,7 +237,7 @@ struct SearchView: View {
                             
 //       DETAILED VIEW
                             
-//                                ADD FAVORITE BUTTON
+//       ADD FAVORITE BUTTON
                             Button(action: {
                                 toggleFavorite(MealItem.idMeal)
                             }) {
@@ -264,7 +275,8 @@ struct SearchView: View {
                                 Text("Area: \(MealItem.strArea)")
                                 Text("Category: \(MealItem.strCategory)")
                                 Text("You need: ")
-                                Text("\(MealItem.measuredIngredient())")
+                                Text("\(MealItem.strIngredient) : \(MealItem.strMeasure)")
+//                                Text("\(MealItem.measuredIngredient())")
                             }
                             Spacer()
                                                         
