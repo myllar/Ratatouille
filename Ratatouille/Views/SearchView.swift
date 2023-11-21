@@ -7,16 +7,9 @@ struct SearchView: View {
     @State private var searchText: String = ""
     @State private var selectCategory: String = ""
     @State private var selectArea: String = ""
-    
-    @Environment(\.managedObjectContext) var mealDataContext
-//    var setFavorite: Set<String>
-    
-    
-    
-    
-    
-    //  SET AND CACHE FAVORITES
     @State private var setFavorite: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "setFavorite") ?? [])
+    @Environment(\.managedObjectContext) var mealDataContext
+    
     
     //          FILTERED MEALS VIEW
     var loadFilteredMeals: [MealItem] {
@@ -66,53 +59,49 @@ struct SearchView: View {
     
     
     var body: some View {
-        
         NavigationStack {
-            HStack{
-                TextField("Search meal by name", text: $searchText)
+            
+            VStack {
+                Text("Velg filter eller søk fritekst")
+                HStack {
+                    VStack{
+//                        Text("Filtrer på kategori")
+                        Picker("Filtrer på kategori", selection: $selectCategory) {
+                            Text("🍽️").tag("")
+                            ForEach(filterCategory, id: \.self) {
+                                category in Text(category).tag(category)
+                            }
+                        }
+                    }
+                    VStack{
+//                        Text("Filtrer på område")
+                        Picker("Filtrer på område", selection: $selectArea) {
+                            Text("🌍").tag("")
+                            ForEach(filterArea, id: \.self) {
+                                area in Text(area).tag(area)
+                            }
+                        }
+                    }
+                }
+                TextField("Søk matrett på navn", text: $searchText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
             }
-            
-            HStack{
-                VStack{
-                    Text("Filtrer på kategori")
-                    Picker("Filtrer på kategori", selection: $selectCategory) {
-                        Text("Alle").tag("")
-                        ForEach(filterCategory, id: \.self) {
-                            category in Text(category).tag(category)
-                        }
-                    }
-                }
-                
-                Spacer()
-                
-                VStack{
-                    Text("Filtrer på område")
-                    Picker("Filtrer på område", selection: $selectArea) {
-                        Text("Alle").tag("")
-                        ForEach(filterArea, id: \.self) {
-                            area in Text(area).tag(area)
-                        }
-                    }
-                }
-                
-            }.padding()
-                .foregroundColor(.brandPrimary)
+            .foregroundColor(.brandPrimary)
             
             
             
             
             
-            //      MEAL VERTICAL LIST VIEW:
-            //      MEAL VERTICAL LIST VIEW:
-            
-            
+//      MEAL VERTICAL LIST VIEW:
             
             VStack{
                 List (loadFilteredMeals, id: \.idMeal) { mealItems in
                     VStack (alignment: .leading) {
                         
                         NavigationLink {
+                            
+                            ScrollView {
                             
                             Button(action: {
                                 toggleFavorite(mealItems.idMeal)
@@ -124,8 +113,8 @@ struct SearchView: View {
                                 }
                             }
                             
-                            VStack {
-                                Text("Name: \(mealItems.strMeal)")
+                            VStack(alignment: .center) {
+                                
                                 
                                 if let mealImageURL = URL(string: mealItems.strMealThumb) {
                                     AsyncImage(url: mealImageURL) { phase in
@@ -145,15 +134,61 @@ struct SearchView: View {
                                                 .resizable()
                                                 .scaledToFit()
                                                 .cornerRadius(100)
+                                        @unknown default:
+                                            fatalError()
                                         }
                                     }
+//                                    HStack {
+//                                        Text("\(mealItems.strMeal)").fontWeight(.bold)
+//                                        Text("\(mealItems.strMeal)")
+//                                    }
+//                                    .foregroundColor(.brandPrimary)
+                                    
+//                                    VStack {
+                                    VStack(alignment: .leading) {
+                                        VStack(alignment: .leading) {
+                                            Text("Name: ").fontWeight(.bold)
+                                            Text("\(mealItems.strMeal)")
+                                        }
+                                        .padding()
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text("Area: ").fontWeight(.bold)
+                                            Text("\(mealItems.strArea)")
+                                        }
+                                        .padding()
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text("Category: ").fontWeight(.bold)
+                                            Text("\(mealItems.strCategory)")
+                                        }
+                                        .padding()
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text("You need: ").fontWeight(.bold)
+                                            //                                            Text("\(mealItems.ingredient)")
+                                        }
+                                        .padding()
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text("Instructions: ").fontWeight(.bold)
+                                            Text("\(mealItems.strInstructions)")
+                                        }
+                                        .padding()
+                                        
+                                        //                                Text("\(MealItem.strIngredient) : \(MealItem.strMeasure)")
+                                        //                                Text("\(MealItem.measuredIngredient())")
+                                        
+                                        //                                    Text("Ingredients: \(mealItems.strCategory)")
+                                        
+                                    }
+//                                }
+                                    .padding()
+                                    .foregroundColor(.brandPrimary)
                                 }
-                                Text("Area: \(mealItems.strArea)")
-                                Text("Category: \(mealItems.strCategory)")
-                                Text("You need: ")
-                                //                                Text("\(MealItem.strIngredient) : \(MealItem.strMeasure)")
-                                //                                Text("\(MealItem.measuredIngredient())")
                             }
+                            }
+                            
                             Spacer()
                             
                         } label: {
@@ -169,31 +204,37 @@ struct SearchView: View {
                                                     .resizable()
                                                     .scaledToFit()
                                                     .cornerRadius(100)
+                                                    .padding()
                                             case .failure:
                                                 Image(systemName: "photo")
                                                     .resizable()
                                                     .scaledToFit()
                                                     .cornerRadius(100)
+                                                    .padding()
                                             case .empty:
                                                 Image(systemName: "photo")
                                                     .resizable()
                                                     .scaledToFit()
                                                     .cornerRadius(100)
+                                                    .padding()
+                                            @unknown default:
+                                                fatalError()
                                             }
                                         }
                                     }
                                     Text("Name: \(mealItems.strMeal)")
                                     Text("Area: \(mealItems.strArea)")
                                     Text("Category: \(mealItems.strCategory)")
-                                }
-                                
-                                Button(action: {
-                                    toggleFavorite(mealItems.idMeal)
-                                }) {
-                                    if setFavorite.contains(mealItems.idMeal) {
-                                        Image(systemName: "star.fill")
-                                    } else {
-                                        Image(systemName: "star")
+                                    
+                                    
+                                    Button(action: {
+                                        toggleFavorite(mealItems.idMeal)
+                                    }) {
+                                        if setFavorite.contains(mealItems.idMeal) {
+                                            Image(systemName: "star.fill")
+                                        } else {
+                                            Image(systemName: "star")
+                                        }
                                     }
                                 }
                             }
@@ -221,20 +262,20 @@ struct SearchView: View {
     //          ADD TOGGLE FAVORITE
     
     func toggleFavorite(_ id: String) {
-        if setFavorite.contains(id) {
-            setFavorite.remove(id)
-            
-            deleteMeal(withId: id)
-            //
-        } else {
-            setFavorite.insert(id)
-            
-            if let selectedMeal = mealItems.first(where: {$0.idMeal == id}) {
-                createMeal(from: selectedMeal)
+            if setFavorite.contains(id) {
+                setFavorite.remove(id)
+                
+                deleteMeal(withId: id)
+                //
+            } else {
+                setFavorite.insert(id)
+                
+                if let selectedMeal = mealItems.first(where: {$0.idMeal == id}) {
+                    createMeal(from: selectedMeal)
+                }
             }
-        }
-        
-        UserDefaults.standard.set(Array(setFavorite), forKey: "savedFavoriteMeals")
+            
+            UserDefaults.standard.set(Array(setFavorite), forKey: "savedFavoriteMeals")
     }
     
     

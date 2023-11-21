@@ -50,7 +50,6 @@ struct SettingsView: View {
                     
 //Section 2
                     Section(header: Text("System-instillinger")) {
-                        
                         Toggle(isOn: $isDarkMode, label: {
                             HStack{
                                 Image(systemName: isDarkMode ? "moon.circle.fill" : "moon.circle")
@@ -61,12 +60,12 @@ struct SettingsView: View {
                     }
 //Section 3
                     Section(header: Text("Section 3")) {
-                    NavigationLink {
-                        Text("siden form å Administrere arkiv")
-                    } label: {
-                        HStack{
-                            Image(systemName: "info.circle")
-                            Text("Administrere arkiv")
+                       NavigationLink {
+                            ArchiveView()
+                        } label: {
+                            HStack{
+                                Image(systemName: "info.circle")
+                                Text("Administrere arkiv")
                             }
                         }
                     }

@@ -16,8 +16,8 @@ struct RatatouilleApp: App {
     
     var body: some Scene {
         WindowGroup {
-            Image("HERO_main")
-            ZStack{
+            VStack {
+                Image("HERO_main")
                 BottomTabView()
                     .environment(\.managedObjectContext, dataController.container.viewContext)
             }

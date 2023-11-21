@@ -32,12 +32,12 @@ struct ArchiveView: View {
                                     .foregroundColor(meal.archived ? .green : .red)
                             }
                             
-//                            Button(action: {
-//                                deleteMeal(meal)
-//                            }) {
-//                                Image(systemName: "trash")
-//                                    .foregroundColor(.red)
-//                            }
+                            Button(action: {
+                                deleteMeal(meal)
+                            }) {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red)
+                            }
                             
 //                            if meal.archived {
 //                                Button(action: {
@@ -66,19 +66,19 @@ struct ArchiveView: View {
                     archivedMeal.strCategory = meal.strCategory
                     viewContext.delete(meal)
                 }
-                
                 try? viewContext.save()
             }
         }
     
     
         
-        private func deleteMeal(_ meal: Meal) {
+        private func deleteMeal(_ meal: Archived) {
             viewContext.delete(meal)
             do {
                 try viewContext.save()
+                print("Successfull delete from Archived entity")
             } catch {
-                print("Error deleting meal: \(error)")
+                print("Error deleting meal from Archived entity: \(error)")
             }
         }
         
@@ -91,6 +91,7 @@ struct ArchiveView: View {
                 viewContext.delete(meal)
                 
                 try? viewContext.save()
+                print("Successfull delete from Archived entity")
             }
         }
     }

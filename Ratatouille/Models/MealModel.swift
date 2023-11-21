@@ -1,12 +1,4 @@
-//
-//  MealModel.swift
-//  Ratatouille
-//
-//  Created by oscar student on 21/11/2023.
-//
-
 import Foundation
-
 import UIKit
 
 struct MealItem: Codable, Identifiable {
