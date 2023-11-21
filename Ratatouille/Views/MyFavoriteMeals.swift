@@ -11,22 +11,12 @@ struct MyFavoriteMeals: View {
     
 //    @State private var mealItems: [MealItem] = []
 //    @State private var setFavorite: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "setFavorite") ?? [])
-//    
-    
-    
+
     var body: some View {
-        Text("Hello, from myFavoriteMeals")
-//        
-//        HStack {
-//            getAllFavoriteMeals()
-//        }
+        HStack {
+            Text("Hello, from myFavoriteMeals")
+        }
     }
-//    
-//    func getAllFavoriteMeals() {
-//        let favoriteMealIds = Array(setFavorite)
-//        let favoriteMeals = mealItem.filter { favoriteMealIds.contains($0.idMeal) }
-//        self.mealItem = setFavorite
-//    }
 }
 
 #Preview {

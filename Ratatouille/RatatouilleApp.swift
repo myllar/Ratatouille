@@ -11,12 +11,7 @@ import SwiftUI
 struct RatatouilleApp: App {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
-//    init() {
-//        if isDarkMode {
-//            isDarkMode ? .dark : .light
-//        } else {
-//        }
-//    }
+
     
     var body: some Scene {
         

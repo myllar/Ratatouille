@@ -77,8 +77,8 @@ struct MealItem: Codable, Identifiable {
     let strCategory: String
     let strInstructions: String
     let strMealThumb: String
-    let strIngredient: String
-    let strMeasure: String
+//    let strIngredient: String?
+//    let strMeasure: String?
     
 //    let ingredient: [(name: String, measure: String)]?
     
@@ -98,8 +98,8 @@ struct MealItem: Codable, Identifiable {
         case strCategory
         case strInstructions
         case strMealThumb
-        case strIngredient
-        case strMeasure
+//        case strIngredient
+//        case strMeasure
         
 //        case strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strIngredient16, strIngredient17, strIngredient18, strIngredient19, strIngredient20
 //        case strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5, strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10, strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15, strMeasure16, strMeasure17, strMeasure18, strMeasure19, strMeasure20
@@ -118,8 +118,8 @@ struct MealItem: Codable, Identifiable {
         strInstructions = try mealItemContainer.decode(String.self, forKey: .strInstructions)
         strMealThumb = try mealItemContainer.decode(String.self, forKey: .strMealThumb)
         
-        strIngredient = try mealItemContainer.decode(String.self, forKey: .strIngredient)
-        strMeasure = try mealItemContainer.decode(String.self, forKey: .strMeasure)
+//        strIngredient = try mealItemContainer.decode(String.self, forKey: .strIngredient)
+//        strMeasure = try mealItemContainer.decode(String.self, forKey: .strMeasure)
         
         
 //        ingredient = (1...20).compactMap { index in guard
@@ -154,15 +154,21 @@ struct MealItem: Codable, Identifiable {
 struct APIController {
     static func getAllMeals(completion: @escaping ([MealItem]) -> Void){
         let apiURL = URL(string: 
-        "https://www.themealdb.com/api/json/v1/1/search.php?s=Taco")!
+        "https://www.themealdb.com/api/json/v1/1/search.php?s=Cajun")!
 //        "https://www.themealdb.com/api/json/v1/1/search.php?s=")!
         
         Task {
             do {
                 let (data, _) = try await URLSession.shared.data(from: apiURL)
+//                print("API Response Data: \(String(data: data, encoding: .utf8) ?? "No data")")
+                
                 let mealResponse = try JSONDecoder().decode(MealResponse.self, from: data)
+                print("Decoded Meals: \(mealResponse.meals)")
+                
                 completion(mealResponse.meals)
+                
             }catch{
+                print("Error decoding API response: \(error)")
                 completion([])
             }
         }
@@ -275,7 +281,7 @@ struct SearchView: View {
                                 Text("Area: \(MealItem.strArea)")
                                 Text("Category: \(MealItem.strCategory)")
                                 Text("You need: ")
-                                Text("\(MealItem.strIngredient) : \(MealItem.strMeasure)")
+//                                Text("\(MealItem.strIngredient) : \(MealItem.strMeasure)")
 //                                Text("\(MealItem.measuredIngredient())")
                             }
                             Spacer()
