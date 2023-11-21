@@ -11,13 +11,16 @@ struct BottomTabView: View {
     var body: some View {
         TabView {
             
+            ArchiveView()
+                .tabItem { Label("Søk", systemImage: "doc.text.magnifyingglass") }
+            
             
             SearchView()
                 .tabItem { Label("Søk", systemImage: "doc.text.magnifyingglass") }
             //add icon for darkmode
-            
-            
 
+            
+            
             
             
 //            MealListView()
@@ -26,6 +29,18 @@ struct BottomTabView: View {
             //                Text("Import MyRecipesView")
                 .tabItem { Label("myFavorites", systemImage: "takeoutbag.and.cup.and.straw") }
             //add icon for darkmode
+
+
+//            ContentView()
+//                .tabItem { Label("contentView test", systemImage: "takeoutbag.and.cup.and.straw") }
+            
+            
+            
+            
+
+            
+            
+
             
             
 

@@ -12,6 +12,7 @@ struct RatatouilleApp: App {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
 
+    @StateObject private var dataController = DataController()
     
     var body: some Scene {
         
@@ -24,6 +25,7 @@ struct RatatouilleApp: App {
                 Text("hello, this is the header! HEROImage coming soon")
             
                 BottomTabView()
+                    .environment(\.managedObjectContext, dataController.container.viewContext)
                 
             }
             
