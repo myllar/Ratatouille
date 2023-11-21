@@ -15,21 +15,16 @@ struct RatatouilleApp: App {
     @StateObject private var dataController = DataController()
     
     var body: some Scene {
-        
-// ADD CHECK FOR DARKMODE = TRUE
-        
         WindowGroup {
+            Image("HERO_main")
             ZStack{
-                Text("hello, this is the header! HEROImage coming soon")
-                Text("hello, this is the header! HEROImage coming soon")
-                Text("hello, this is the header! HEROImage coming soon")
-            
                 BottomTabView()
                     .environment(\.managedObjectContext, dataController.container.viewContext)
-                
             }
-            
         }
     }
 }
 
+//#Preview {
+//    ArchiveView()
+//}

@@ -4,10 +4,7 @@ import Foundation
 
 import UIKit
 
-// ---------------------------------------------- MEAL MODEL
 
-
-// ---------------------------------------------- MEAL MODEL
 struct ArchivedMealItem: Codable, Identifiable {
     let idMeal: String
     let strMeal: String

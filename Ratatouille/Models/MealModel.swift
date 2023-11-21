@@ -9,10 +9,6 @@ import Foundation
 
 import UIKit
 
-// ---------------------------------------------- MEAL MODEL
-
-
-// ---------------------------------------------- MEAL MODEL
 struct MealItem: Codable, Identifiable {
     let idMeal: String
     let strMeal: String
@@ -22,16 +18,13 @@ struct MealItem: Codable, Identifiable {
     let strMealThumb: String
 //    let strIngredient: String?
 //    let strMeasure: String?
-    
-//    let ingredient: [(name: String, measure: String)]?
 
-    
+//    let ingredient: [(name: String, measure: String)]?
     
     //  ENABLE IDENTIFIABLE
     var id: String { idMeal}
 //    let idMeal = UUID()
-    
-    
+        
     // POSSIBLE TO SHORTHAND? ..."strIngredient\($)"
     //              "...+index"
     
@@ -77,10 +70,7 @@ struct MealItem: Codable, Identifiable {
 //        }
     }
 }
-
-
 //    //  EDIT PRESENTATION OF INGREDIENT+MEASURE
-    
 //    extension MealItem {
 //        func measuredIngredient() -> String {
 //            return ingredient?.map {

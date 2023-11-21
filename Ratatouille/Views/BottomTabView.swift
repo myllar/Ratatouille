@@ -11,8 +11,9 @@ struct BottomTabView: View {
     var body: some View {
         TabView {
             
+            
             ArchiveView()
-                .tabItem { Label("Søk", systemImage: "doc.text.magnifyingglass") }
+                .tabItem { Label("Arkiverte", systemImage: "doc.text.magnifyingglass") }
             
             
             SearchView()
@@ -20,7 +21,7 @@ struct BottomTabView: View {
             //add icon for darkmode
 
             
-            
+    
             
             
 //            MealListView()
