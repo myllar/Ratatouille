@@ -16,6 +16,15 @@ struct BottomTabView: View {
                 .tabItem { Label("Arkiverte", systemImage: "doc.text.magnifyingglass") }
             
             
+//            MealListView()
+            MyFavoriteMeals()
+
+            //                Text("Import MyRecipesView")
+                .tabItem { Label("myFavorites", systemImage: "takeoutbag.and.cup.and.straw") }
+            //add icon for darkmode
+            
+            
+            
             SearchView()
                 .tabItem { Label("Søk", systemImage: "doc.text.magnifyingglass") }
             //add icon for darkmode
@@ -24,12 +33,7 @@ struct BottomTabView: View {
     
             
             
-//            MealListView()
-            MyFavoriteMeals()
 
-            //                Text("Import MyRecipesView")
-                .tabItem { Label("myFavorites", systemImage: "takeoutbag.and.cup.and.straw") }
-            //add icon for darkmode
 
 
 //            ContentView()

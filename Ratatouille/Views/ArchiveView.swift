@@ -6,18 +6,18 @@ struct ArchiveView: View {
     @Environment(\.managedObjectContext) private var viewContext
         
         @FetchRequest(
-            entity: Meal.entity(),
+            entity: Archived.entity(),
             sortDescriptors: [
                 
                 //KEY PATH ID?
-                NSSortDescriptor(keyPath: \Meal.strMeal, ascending: true)
+                NSSortDescriptor(keyPath: \Archived.strMeal, ascending: true)
             ]
-        ) var meals: FetchedResults<Meal>
+        ) var archivedMeals: FetchedResults<Archived>
         
         var body: some View {
             NavigationView {
                 List {
-                    ForEach(meals, id: \.id) { meal in
+                    ForEach(archivedMeals, id: \.id) { meal in
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(meal.strMeal ?? "Unknown Meal")
@@ -32,21 +32,21 @@ struct ArchiveView: View {
                                     .foregroundColor(meal.archived ? .green : .red)
                             }
                             
-                            Button(action: {
-                                deleteMeal(meal)
-                            }) {
-                                Image(systemName: "trash")
-                                    .foregroundColor(.red)
-                            }
+//                            Button(action: {
+//                                deleteMeal(meal)
+//                            }) {
+//                                Image(systemName: "trash")
+//                                    .foregroundColor(.red)
+//                            }
                             
-                            if meal.archived {
-                                Button(action: {
-                                    unarchiveMeal(meal)
-                                }) {
-                                    Text("Unarchive")
-                                        .foregroundColor(.blue)
-                                }
-                            }
+//                            if meal.archived {
+//                                Button(action: {
+//                                    unarchiveMeal(meal)
+//                                }) {
+//                                    Text("Unarchive")
+//                                        .foregroundColor(.blue)
+//                                }
+//                            }
                         }
                     }
                 }
@@ -54,26 +54,27 @@ struct ArchiveView: View {
             }
         }
         
-        private func toggleArchivedStatus(_ meal: Meal) {
+
+// Move archived entity back to favorites
+        private func toggleArchivedStatus(_ meal: Archived) {
             withAnimation {
                 meal.archived.toggle()
                 
-                // If archived, move to Archived entity
-                if meal.archived {
-                    let archivedMeal = Archived(context: viewContext)
+                 if !meal.archived {
+                    let archivedMeal = Meal(context: viewContext)
                     archivedMeal.strMeal = meal.strMeal
                     archivedMeal.strCategory = meal.strCategory
-                    
                     viewContext.delete(meal)
                 }
                 
                 try? viewContext.save()
             }
         }
+    
+    
         
         private func deleteMeal(_ meal: Meal) {
             viewContext.delete(meal)
-            
             do {
                 try viewContext.save()
             } catch {
