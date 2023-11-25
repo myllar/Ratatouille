@@ -61,7 +61,7 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             
-            VStack {
+            HStack {
                 Text("Velg filter eller søk fritekst")
                 HStack {
                     VStack{
@@ -88,7 +88,7 @@ struct SearchView: View {
                     .padding()
             }
             .foregroundColor(.brandPrimary)
-            
+            .padding()
             
             
             
@@ -193,7 +193,21 @@ struct SearchView: View {
                             
                         } label: {
                             
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             //       PREVIEW VIEW
+                           
+                            
+                            
+                            
                             VStack {
                                 HStack {
                                     if let mealImageURL = URL(string: mealItems.strMealThumb) {
@@ -222,20 +236,45 @@ struct SearchView: View {
                                             }
                                         }
                                     }
+                                    
+                                    
                                     Text("Name: \(mealItems.strMeal)")
                                     Text("Area: \(mealItems.strArea)")
                                     Text("Category: \(mealItems.strCategory)")
                                     
                                     
-                                    Button(action: {
-                                        toggleFavorite(mealItems.idMeal)
-                                    }) {
-                                        if setFavorite.contains(mealItems.idMeal) {
-                                            Image(systemName: "star.fill")
-                                        } else {
-                                            Image(systemName: "star")
+                                    .swipeActions(edge: .trailing) {
+                                        HStack{
+                                            Button(action: {
+                                                toggleFavorite(mealItems.idMeal)
+                                            }) {
+                                                if setFavorite.contains(mealItems.idMeal) {
+                                                    Image(systemName: "star.fill")
+                                                        .foregroundColor(.red)
+                                                } else {
+                                                    Image(systemName: "star")
+                                                        .foregroundColor(.green)
+                                                }
+                                            }
                                         }
                                     }
+                                
+                                    .swipeActions(edge: .leading) {
+                                        HStack{
+                                            Button(action: {
+                                                toggleFavorite(mealItems.idMeal)
+                                            }) {
+                                                if setFavorite.contains(mealItems.idMeal) {
+                                                    Image(systemName: "star.fill")
+                                                        .foregroundColor(.red)
+                                                } else {
+                                                    Image(systemName: "star")
+                                                        .foregroundColor(.green)
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
                                 }
                             }
                         }
@@ -253,9 +292,9 @@ struct SearchView: View {
     
     
     func loadMealItems() {
-        APIController.getAllMeals { loadedMealItems in DispatchQueue.main.async {
-            self.mealItems = loadedMealItems
-        }
+            APIController.getAllMeals { loadedMealItems in DispatchQueue.main.async {
+                self.mealItems = loadedMealItems
+            }
         }
     }
     

@@ -27,8 +27,10 @@ struct MyFavoriteMeals: View {
                         Button(action: {
                             toggleArchivedStatus(meal)
                         }) {
-                            Text(meal.archived ? "Unarchive" : "Archive")
-                                .foregroundColor(meal.archived ? .green : .red)
+//                            Text(meal.archived ? "Unarchive" : "Archive")
+//                                .foregroundColor(meal.archived ? .green : .red)
+                            Image(systemName: "archivebox")
+                                .foregroundColor(.red)
                         }
                     }
                 }
@@ -47,6 +49,7 @@ struct MyFavoriteMeals: View {
                 archivedMeal.strMeal = meal.strMeal
                 archivedMeal.strCategory = meal.strCategory
                 
+//                toggleFavorite(/*T##String*/)
                 viewContext.delete(meal)
             }
             
