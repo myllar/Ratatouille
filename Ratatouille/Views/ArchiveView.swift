@@ -192,7 +192,7 @@ struct ArchiveView: View {
 //        withAnimation {
 //            meal.archived.toggle()
             
-            if !meal.archived {
+            if !meal.isArchived {
                 unarchiveMeal(meal)
                 print("Successfully unArchived")
             }
@@ -217,7 +217,7 @@ struct ArchiveView: View {
 //        withAnimation {
 //            meal.toggle()
             
-            if !meal.archived {
+            if !meal.isArchived {
                 deleteMeal(meal)
                 print("Successfully deleted")
             } else {

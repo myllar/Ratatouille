@@ -16,7 +16,6 @@ class DataController: ObservableObject {
             if let error = error {
                 print("Failed to load data from the DataModel \(error.localizedDescription)")
             }
-            
         }
     }
 }

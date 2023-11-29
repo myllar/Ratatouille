@@ -93,7 +93,7 @@ struct SearchView: View {
             
             
             
-//      MEAL VERTICAL LIST VIEW:
+//      MEAL VERTICAL FULL LIST VIEW:
             
             VStack{
                 List (loadFilteredMeals, id: \.idMeal) { mealItems in
@@ -166,8 +166,14 @@ struct SearchView: View {
                                         
                                         VStack(alignment: .leading) {
                                             Text("You need: ").fontWeight(.bold)
-                                            //                                            Text("\(mealItems.ingredient)")
+                                            Text("\(mealItems.measuredIngredient())")
                                         }
+                                        .padding()
+                                        
+//                                        VStack(alignment: .leading) {
+//                                            Text("You need: ").fontWeight(.bold)
+//                                            //                                            Text("\(mealItems.ingredient)")
+//                                        }
                                         .padding()
                                         
                                         VStack(alignment: .leading) {
@@ -243,7 +249,7 @@ struct SearchView: View {
                                     Text("Category: \(mealItems.strCategory)")
                                     
                                     
-                                    .swipeActions(edge: .trailing) {
+//                                        .swipeActions(edge: HorizontalEdge .leading) {
                                         HStack{
                                             Button(action: {
                                                 toggleFavorite(mealItems.idMeal)
@@ -257,9 +263,9 @@ struct SearchView: View {
                                                 }
                                             }
                                         }
-                                    }
+//                                    }
                                 
-                                    .swipeActions(edge: .leading) {
+//                                    .swipeActions(edge: .leading) {
                                         HStack{
                                             Button(action: {
                                                 toggleFavorite(mealItems.idMeal)
@@ -267,13 +273,13 @@ struct SearchView: View {
                                                 if setFavorite.contains(mealItems.idMeal) {
                                                     Image(systemName: "star.fill")
                                                         .foregroundColor(.red)
-                                                } else {
-                                                    Image(systemName: "star")
-                                                        .foregroundColor(.green)
+//                                                } else {
+//                                                    Image(systemName: "star")
+//                                                        .foregroundColor(.green)
                                                 }
                                             }
                                         }
-                                    }
+//                                    }
                                     
                                 }
                             }

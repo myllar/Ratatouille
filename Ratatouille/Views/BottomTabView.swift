@@ -10,20 +10,34 @@ import SwiftUI
 struct BottomTabView: View {
     var body: some View {
         TabView {
+
             
             SearchView()
                 .tabItem { Label("Søk", systemImage: "doc.text.magnifyingglass") }
             //add icon for darkmode
             
-            ArchiveView()
-                .tabItem { Label("Arkiverte", systemImage: "doc.text.magnifyingglass") }
+            
+            
+            
+            
+            
             
             
 //            MealListView()
             MyFavoriteMeals()
             //                Text("Import MyRecipesView")
-                .tabItem { Label("Mine favoritter", systemImage: "takeoutbag.and.cup.and.straw") }
+                .tabItem { Label("Mine oppskrifter", systemImage: "takeoutbag.and.cup.and.straw") }
             //add icon for darkmode
+            
+            
+            
+
+            
+            ArchiveView()
+                .tabItem { Label("Arkiverte", systemImage: "doc.text.magnifyingglass") }
+            
+            
+
             
             
             

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B81" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="Archived" representedClassName="Archived" syncable="YES" codeGenerationType="class">
-        <attribute name="archived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="idMeal" optional="YES" attributeType="String"/>
+        <attribute name="isArchived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="strArea" optional="YES" attributeType="String"/>
         <attribute name="strCategory" optional="YES" attributeType="String"/>
         <attribute name="strIngredient" optional="YES" attributeType="String"/>
@@ -12,8 +13,9 @@
         <attribute name="strMeasure" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Meal" representedClassName="Meal" syncable="YES" codeGenerationType="class">
-        <attribute name="archived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="idMeal" optional="YES" attributeType="String"/>
+        <attribute name="isArchived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="strArea" optional="YES" attributeType="String"/>
         <attribute name="strCategory" optional="YES" attributeType="String"/>
         <attribute name="strIngredient" optional="YES" attributeType="String"/>

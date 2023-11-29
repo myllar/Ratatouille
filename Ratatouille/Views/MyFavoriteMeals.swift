@@ -16,35 +16,46 @@ struct MyFavoriteMeals: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(meals, id: \.id) { meal in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(meal.strMeal ?? "Unknown Meal")
-                            Text(meal.strCategory ?? "Unknown category")
-                        }
-                        Spacer()
-                        Button(action: {
-                            toggleArchivedStatus(meal)
-                        }) {
-//                            Text(meal.archived ? "Unarchive" : "Archive")
-//                                .foregroundColor(meal.archived ? .green : .red)
-                            Image(systemName: "archivebox")
-                                .foregroundColor(.red)
-                        }
+            
+                if meals.count != 0 {
+                    List {
+                    
+                    ForEach(meals, id: \.id) { meal in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(meal.strMeal ?? "Unknown Meal")
+                                Text(meal.strCategory ?? "Unknown category")
+                            }
+                            Spacer()
+                            Button(action: {
+                                toggleArchivedStatus(meal)
+                            }) {
+    //                            Text(meal.archived ? "Unarchive" : "Archive")
+    //                                .foregroundColor(meal.archived ? .green : .red)
+                                Image(systemName: "archivebox")
+                                    .foregroundColor(.red)
+                            }
+                        }            }
+                    }.navigationBarTitle("Mine oppskrifter")
+                }
+                else {
+                    VStack{
+                        Image(systemName: "questionmark.folder")
+                            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                        Text("Ingen matoppskrifter")
                     }
                 }
-            }
-            .navigationBarTitle("Mine favoritter")
+            
+            
         }
     }
     
     private func toggleArchivedStatus(_ meal: Meal) {
         withAnimation {
-            meal.archived.toggle()
+            meal.isArchived.toggle()
             
             // If archived, move to Archived entity
-            if meal.archived {
+            if meal.isArchived {
                 let archivedMeal = Archived(context: viewContext)
                 archivedMeal.strMeal = meal.strMeal
                 archivedMeal.strCategory = meal.strCategory
