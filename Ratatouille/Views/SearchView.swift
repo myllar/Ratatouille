@@ -7,6 +7,7 @@ struct SearchView: View {
     @State private var searchText: String = ""
     @State private var selectCategory: String = ""
     @State private var selectArea: String = ""
+    
     @State private var setFavorite: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "setFavorite") ?? [])
     @Environment(\.managedObjectContext) var mealDataContext
     
@@ -170,25 +171,13 @@ struct SearchView: View {
                                         }
                                         .padding()
                                         
-//                                        VStack(alignment: .leading) {
-//                                            Text("You need: ").fontWeight(.bold)
-//                                            //                                            Text("\(mealItems.ingredient)")
-//                                        }
-                                        .padding()
-                                        
                                         VStack(alignment: .leading) {
                                             Text("Instructions: ").fontWeight(.bold)
                                             Text("\(mealItems.strInstructions)")
                                         }
                                         .padding()
-                                        
-                                        //                                Text("\(MealItem.strIngredient) : \(MealItem.strMeasure)")
-                                        //                                Text("\(MealItem.measuredIngredient())")
-                                        
-                                        //                                    Text("Ingredients: \(mealItems.strCategory)")
-                                        
                                     }
-//                                }
+
                                     .padding()
                                     .foregroundColor(.brandPrimary)
                                 }
@@ -205,14 +194,8 @@ struct SearchView: View {
                             
                             
                             
-                            
-                            
-                            
-                            
                             //       PREVIEW VIEW
                            
-                            
-                            
                             
                             VStack {
                                 HStack {
@@ -266,19 +249,19 @@ struct SearchView: View {
 //                                    }
                                 
 //                                    .swipeActions(edge: .leading) {
-                                        HStack{
-                                            Button(action: {
-                                                toggleFavorite(mealItems.idMeal)
-                                            }) {
-                                                if setFavorite.contains(mealItems.idMeal) {
-                                                    Image(systemName: "star.fill")
-                                                        .foregroundColor(.red)
-//                                                } else {
-//                                                    Image(systemName: "star")
-//                                                        .foregroundColor(.green)
-                                                }
-                                            }
-                                        }
+//                                        HStack{
+//                                            Button(action: {
+//                                                toggleFavorite(mealItems.idMeal)
+//                                            }) {
+//                                                if setFavorite.contains(mealItems.idMeal) {
+//                                                    Image(systemName: "star.fill")
+//                                                        .foregroundColor(.red)
+////                                                } else {
+////                                                    Image(systemName: "star")
+////                                                        .foregroundColor(.green)
+//                                                }
+//                                            }
+//                                        }
 //                                    }
                                     
                                 }
