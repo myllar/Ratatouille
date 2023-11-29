@@ -246,6 +246,7 @@ struct SearchView: View {
                                                 }
                                             }
                                         }
+                                    
 //                                    }
                                 
 //                                    .swipeActions(edge: .leading) {
