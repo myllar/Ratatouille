@@ -14,10 +14,10 @@
             filePath = "Ratatouille/Views/SearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "loadFilteredMeals"
-            landmarkType = "24">
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "SearchView"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

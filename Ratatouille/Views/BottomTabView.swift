@@ -18,20 +18,12 @@ struct BottomTabView: View {
             
             
             
-            
-            
-            
-            
-            
 //            MealListView()
             MyFavoriteMeals()
             //                Text("Import MyRecipesView")
                 .tabItem { Label("Mine oppskrifter", systemImage: "takeoutbag.and.cup.and.straw") }
             //add icon for darkmode
             
-            
-            
-
             
             ArchiveView()
                 .tabItem { Label("Arkiverte", systemImage: "doc.text.magnifyingglass") }

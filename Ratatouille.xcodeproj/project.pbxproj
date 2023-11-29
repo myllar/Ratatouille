@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550BF36C2B17951C008F5B9C /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BF36B2B17951C008F5B9C /* Buttons.swift */; };
+		550BF36E2B1796D7008F5B9C /* VListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BF36D2B1796D7008F5B9C /* VListView.swift */; };
 		55B86EA12B0CE66600E42B9C /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B86EA02B0CE66500E42B9C /* APIController.swift */; };
 		55B86EA32B0CE79300E42B9C /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B86EA22B0CE79300E42B9C /* MealModel.swift */; };
 		55B86EA52B0D0BC100E42B9C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B86EA42B0D0BC100E42B9C /* DataController.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		550BF36B2B17951C008F5B9C /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		550BF36D2B1796D7008F5B9C /* VListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VListView.swift; sourceTree = "<group>"; };
 		55B86EA02B0CE66500E42B9C /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		55B86EA22B0CE79300E42B9C /* MealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealModel.swift; sourceTree = "<group>"; };
 		55B86EA42B0D0BC100E42B9C /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -95,6 +99,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		550BF36A2B1794D3008F5B9C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				550BF36B2B17951C008F5B9C /* Buttons.swift */,
+				550BF36D2B1796D7008F5B9C /* VListView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		55E03C782B027EB7006890C8 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +131,7 @@
 		55E03C832B027EB7006890C8 /* Ratatouille */ = {
 			isa = PBXGroup;
 			children = (
+				550BF36A2B1794D3008F5B9C /* Components */,
 				55E03CD22B0900E6006890C8 /* UTILS */,
 				55E03CC52B051D34006890C8 /* Models */,
 				55E03CAE2B02869F006890C8 /* Views */,
@@ -317,12 +331,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550BF36C2B17951C008F5B9C /* Buttons.swift in Sources */,
 				55E03CC92B069599006890C8 /* BottomTabView.swift in Sources */,
 				55B86EA52B0D0BC100E42B9C /* DataController.swift in Sources */,
 				55E03CBB2B028D2C006890C8 /* SettingsView.swift in Sources */,
 				55E03CB92B028CE4006890C8 /* SearchView.swift in Sources */,
 				55E03CCD2B08AFA8006890C8 /* CRUDTestView.swift in Sources */,
 				55B86EA72B0D2C9B00E42B9C /* ArchivedMealModel.swift in Sources */,
+				550BF36E2B1796D7008F5B9C /* VListView.swift in Sources */,
 				55E03CBD2B036CC1006890C8 /* SettingsRowView.swift in Sources */,
 				55B86EA92B0D2E2D00E42B9C /* ArchiveView.swift in Sources */,
 				55E03C872B027EB7006890C8 /* ContentView.swift in Sources */,

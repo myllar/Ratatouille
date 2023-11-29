@@ -249,21 +249,22 @@ struct SearchView: View {
                                     
 //                                    }
                                 
-//                                    .swipeActions(edge: .leading) {
-//                                        HStack{
-//                                            Button(action: {
-//                                                toggleFavorite(mealItems.idMeal)
-//                                            }) {
-//                                                if setFavorite.contains(mealItems.idMeal) {
-//                                                    Image(systemName: "star.fill")
-//                                                        .foregroundColor(.red)
-////                                                } else {
-////                                                    Image(systemName: "star")
-////                                                        .foregroundColor(.green)
-//                                                }
-//                                            }
-//                                        }
-//                                    }
+                                    .swipeActions(edge: .trailing) {
+                                        HStack{
+                                            Button(action: {
+                                                toggleFavorite(mealItems.idMeal)
+                                            }) {
+                                                if setFavorite.contains(mealItems.idMeal) {
+                                                    Image(systemName: "star.fill")
+                                                        .foregroundColor(.red)
+                                                    
+                                                } else {
+                                                    Image(systemName: "star")
+                                                        .foregroundColor(.green)
+                                                }
+                                            }
+                                        }
+                                    }
                                     
                                 }
                             }
@@ -319,13 +320,17 @@ struct SearchView: View {
         newMeal.strMeal = APIController.strMeal
         newMeal.strArea = APIController.strArea
         newMeal.strCategory = APIController.strCategory
-//        newMeal.strInstructions = APIController.strInstructions
+        newMeal.strInstructions = APIController.strInstructions
         newMeal.strMealThumb = APIController.strMealThumb
-        //    newMeal.strIngredient = APIController.strIngredient
-        //    newMeal.strMeasure = APIController.strMeasure
-        //    newMeal.ingredient = APIController.ingredient
+        newMeal.strIngredient = APIController.strIngredient
+        newMeal.strMeasure = APIController.strMeasure
+        newMeal.isFavorite = APIController.isFavorite
+        newMeal.isArchived = APIController.isArchived
         
         do {
+//            isFavorite = true
+//            isArchived = false
+            
             try mealDataContext.save()
             //        try DataController.shared.container?.viewContext.save()
             print("Meal successfully saved")
