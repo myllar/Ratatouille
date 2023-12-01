@@ -7,8 +7,14 @@ struct SearchView: View {
     @State private var searchText: String = ""
     @State private var selectCategory: String = ""
     @State private var selectArea: String = ""
+    @State private var selectIngredient: String = ""
     
     @State private var setFavorite: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "setFavorite") ?? [])
+    
+    @AppStorage("setFavorite") public var isFavorite = false
+    
+    
+    
     @Environment(\.managedObjectContext) var mealDataContext
     
     
@@ -23,15 +29,29 @@ struct SearchView: View {
                     .localizedCaseInsensitiveContains(searchText)
             }
             
+            
         }else if !selectCategory.isEmpty {
             return mealItems.filter { mealItem in
                 mealItem.strCategory == selectCategory
             }
             
+            
         }else if !selectArea.isEmpty{
             return mealItems.filter { mealItem in
                 mealItem.strArea == selectArea
             }
+            
+            
+//        }else if !selectIngredient.isEmpty{
+//            return mealItems.filter { mealItem in
+//                mealItem.strIngredient == selectIngredient
+//            }
+//        }else if !selectIngredient.isEmpty{
+//            return mealItems.filter { mealItem in
+//                mealItem.measuredIngredient() == selectIngredient
+//            }
+            
+            
         }
         else {
             return mealItems
@@ -45,10 +65,14 @@ struct SearchView: View {
     var filterCategory: [String] {
         Array(Set(mealItems.map(\.strCategory)))
     }
+    
     var filterArea: [String] {
         Array(Set(mealItems.map(\.strArea)))
     }
     
+//    var filterIngredient: [String] {
+//        Array(Set(mealItems.map(\.strIngredient)))
+//    }
     
     
     
@@ -74,6 +98,9 @@ struct SearchView: View {
                             }
                         }
                     }
+                    
+                    
+                    
                     VStack{
 //                        Text("Filtrer på område")
                         Picker("Filtrer på område", selection: $selectArea) {
@@ -83,6 +110,24 @@ struct SearchView: View {
                             }
                         }
                     }
+                    
+                    
+                    
+                    
+                    VStack{
+//                        Text("Filtrer på ingrediens")
+                        Picker("Filtrer på ingrediens", selection: $selectIngredient) {
+                            Text("🌍").tag("")
+//                            ForEach(filterIngredient, id: \.self) {
+                                
+//          REMOVE?
+//                                ingredient in Text(ingredient).tag(ingredient)
+//                            }
+                        }
+                    }
+                    
+                    
+                    
                 }
                 TextField("Søk matrett på navn", text: $searchText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -194,7 +239,7 @@ struct SearchView: View {
                             
                             
                             
-                            //       PREVIEW VIEW
+                            //       PREVIEW in List VIEW
                            
                             
                             VStack {
@@ -247,7 +292,7 @@ struct SearchView: View {
                                             }
                                         }
                                     
-//                                    }
+
                                 
                                     .swipeActions(edge: .trailing) {
                                         HStack{
@@ -328,17 +373,17 @@ struct SearchView: View {
         newMeal.isArchived = APIController.isArchived
         
         do {
-//            isFavorite = true
-//            isArchived = false
-            
             try mealDataContext.save()
-            //        try DataController.shared.container?.viewContext.save()
             print("Meal successfully saved")
         } catch {
             print("Error, unable to save \(error)")
         }
-        
     }
+    
+    
+    
+    
+    
 }
 #Preview {
     SearchView()

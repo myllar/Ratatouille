@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isDarkMode") public var isDarkMode = true
+    
     
     var body: some View {
         
