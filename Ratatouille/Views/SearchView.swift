@@ -103,19 +103,17 @@ struct SearchView: View {
                             
                             ScrollView {
                                 
-                                Button(action: {
-                                    toggleFavorite(mealItems.idMeal)
-                                }) {
-                                    if setFavorite.contains(mealItems.idMeal) {
-                                        Image(systemName: "star.fill")
-                                    } else {
-                                        Image(systemName: "star")
-                                    }
-                                }
+//                                Button(action: {
+//                                    toggleFavorite(mealItems.idMeal)
+//                                }) {
+//                                    if setFavorite.contains(mealItems.idMeal) {
+//                                        Image(systemName: "star.fill")
+//                                    } else {
+//                                        Image(systemName: "star")
+//                                    }
+//                                }
                                 
                                 VStack(alignment: .center) {
-                                    
-                                    
                                     if let mealImageURL = URL(string: mealItems.strMealThumb) {
                                         AsyncImage(url: mealImageURL) { phase in
                                             switch phase {
@@ -123,61 +121,50 @@ struct SearchView: View {
                                                 image
                                                     .resizable()
                                                     .scaledToFit()
-                                                    .cornerRadius(100)
+                                                    .cornerRadius(50)
+                                                    .frame(width: 250, height: 250)
                                             case .failure:
                                                 Image(systemName: "photo")
                                                     .resizable()
                                                     .scaledToFit()
-                                                    .cornerRadius(100)
+                                                    .cornerRadius(50)
+                                                    .frame(width: 250, height: 250)
                                             case .empty:
                                                 Image(systemName: "photo")
                                                     .resizable()
                                                     .scaledToFit()
-                                                    .cornerRadius(100)
+                                                    .cornerRadius(50)
+                                                    .frame(width: 250, height: 250)
                                             @unknown default:
                                                 fatalError()
                                             }
                                         }
-                                        //                                    HStack {
-                                        //                                        Text("\(mealItems.strMeal)").fontWeight(.bold)
-                                        //                                        Text("\(mealItems.strMeal)")
-                                        //                                    }
-                                        //                                    .foregroundColor(.brandPrimary)
                                         
-                                        //                                    VStack {
-                                        VStack(alignment: .leading) {
-                                            VStack(alignment: .leading) {
-                                                Text("Name: ").fontWeight(.bold)
-                                                Text("\(mealItems.strMeal)")
+                                        VStack(alignment: .center) {
+                                            VStack(alignment: .center) {
+//                                                Text("Name: ").fontWeight(.bold)
+                                                Text("\(mealItems.strMeal)").fontWeight(.bold)
                                             }
                                             .padding()
                                             
-                                            VStack(alignment: .leading) {
-                                                Text("Area: ").fontWeight(.bold)
-                                                Text("\(mealItems.strArea)")
+                                            VStack {
+                                                Text("\(mealItems.strMeal) er en rett som har \(mealItems.strArea) opphav. Den er ansett som en matrett av typen  \(mealItems.strCategory). Om du ønsker å lære hva retten inneholder og hvordan den lages, bla deg nedover siden.")
                                             }
                                             .padding()
                                             
-                                            VStack(alignment: .leading) {
-                                                Text("Category: ").fontWeight(.bold)
-                                                Text("\(mealItems.strCategory)")
-                                            }
-                                            .padding()
-                                            
-                                            VStack(alignment: .leading) {
-                                                Text("You need: ").fontWeight(.bold)
+                                            VStack {
+                                                Text("\(mealItems.strMeal) inneholder følgende ingredienser: ").fontWeight(.bold).padding()
                                                 Text("\(mealItems.measuredIngredient())")
                                             }
                                             .padding()
                                             
-                                            VStack(alignment: .leading) {
-                                                Text("Instructions: ").fontWeight(.bold)
+                                            VStack {
+                                                Text("Oppskrift og fremgangsmåte: ").fontWeight(.bold).padding()
                                                 Text("\(mealItems.strInstructions)")
                                             }
                                             .padding()
                                         }
                                         
-                                        .padding()
                                         .foregroundColor(.brandPrimary)
                                     }
                                 }
@@ -209,26 +196,28 @@ struct SearchView: View {
                                                         .scaledToFit()
                                                         .cornerRadius(100)
                                                         .padding()
+                                                        .frame(width: 150, height: 150)
                                                 case .failure:
                                                     Image(systemName: "photo")
                                                         .resizable()
                                                         .scaledToFit()
                                                         .cornerRadius(100)
                                                         .padding()
+                                                        .frame(width: 150, height: 150)
                                                 case .empty:
                                                     Image(systemName: "photo")
                                                         .resizable()
                                                         .scaledToFit()
                                                         .cornerRadius(100)
                                                         .padding()
+                                                        .frame(width: 150, height: 150)
                                                 @unknown default:
-                                                    fatalError()
+                                                    fatalError("Unknown error")
                                                 }
                                             }
                                         }
                                         
-                                        
-                                        VStack{
+                                        VStack(alignment: .leading){
                                             Text("\(mealItems.strMeal)").fontWeight(.bold)
                                             Text("\(mealItems.strCategory)")
                                         }
@@ -236,7 +225,6 @@ struct SearchView: View {
                                     
                                     
                                     Spacer()
-                                    
                                     
                                     //      refracture away from button
                                     HStack{
@@ -262,11 +250,13 @@ struct SearchView: View {
                                             }) {
                                                 if setFavorite.contains(mealItems.idMeal) {
                                                     Image(systemName: "star.fill")
-                                                        .foregroundColor(.yellow)
+//                                                        .foregroundColor(.yellow)
+//                                                        .tint(.yellow)
                                                     
                                                 } else {
                                                     Image(systemName: "star")
-                                                        .foregroundColor(.yellow)
+//                                                        .foregroundColor(.yellow)
+//                                                        .tint(.yellow)
                                                 }
                                             }
                                             .tint(.yellow)
@@ -281,11 +271,10 @@ struct SearchView: View {
                                             }) {
                                                 if setFavorite.contains(mealItems.idMeal) {
                                                     Image(systemName: "archivebox")
-                                                        .foregroundColor(.green)
-                                                    
+//                                                        .tint(.green)
                                                 } else {
-                                                    Image(systemName: "star")
-                                                        .foregroundColor(.yellow)
+                                                    Image(systemName: "archivebox")
+//                                                        .tint(.green)
                                                 }
                                             }
                                             .tint(.green)
@@ -298,7 +287,7 @@ struct SearchView: View {
                             }
                         }
                         .foregroundColor(.brandPrimary)
-                        .frame(height: 100)
+                        .scaledToFill()
                     }
                 }
             }
