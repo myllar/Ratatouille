@@ -20,22 +20,23 @@ struct MyFavoriteMeals: View {
                 if meals.count != 0 {
                     List {
                     
-                    ForEach(meals, id: \.id) { meal in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(meal.strMeal ?? "Unknown Meal")
-                                Text(meal.strCategory ?? "Unknown category")
+                        ForEach(meals, id: \.id) { meal in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(meal.strMeal ?? "Unknown Meal")
+                                    Text(meal.strCategory ?? "Unknown category")
+                                }
+                                Spacer()
+                                Button(action: {
+                                    toggleArchivedStatus(meal)
+                                }) {
+                                    //                            Text(meal.archived ? "Unarchive" : "Archive")
+                                    //                                .foregroundColor(meal.archived ? .green : .red)
+                                    Image(systemName: "archivebox")
+                                }
+                                .tint(.red)
                             }
-                            Spacer()
-                            Button(action: {
-                                toggleArchivedStatus(meal)
-                            }) {
-    //                            Text(meal.archived ? "Unarchive" : "Archive")
-    //                                .foregroundColor(meal.archived ? .green : .red)
-                                Image(systemName: "archivebox")
-                                    .foregroundColor(.red)
-                            }
-                        }            }
+                        }
                     }.navigationBarTitle("Mine oppskrifter")
                 }
                 else {

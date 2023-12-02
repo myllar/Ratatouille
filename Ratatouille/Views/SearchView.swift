@@ -15,16 +15,7 @@ struct SearchView: View {
     
     @Environment(\.managedObjectContext) var mealDataContext
     
-    
-    
-
     @State private var isFavorite: Bool = false
-    
-//    @Published var isFavorite: Bool = false
-        
-        
-        
-        
     
     
     //          FILTERED MEALS VIEW
@@ -94,148 +85,102 @@ struct SearchView: View {
     
     var body: some View {
         NavigationStack {
-            
-            HStack {
-                Text("Velg filter eller søk fritekst")
-                HStack {
-                    VStack{
-//                        Text("Filtrer på kategori")
-                        Picker("Filtrer på kategori", selection: $selectCategory) {
-                            Text("🍽️").tag("")
-                            ForEach(filterCategory, id: \.self) {
-                                category in Text(category).tag(category)
-                            }
-                        }
-                    }
-                    
-                    
-                    
-                    VStack{
-//                        Text("Filtrer på område")
-                        Picker("Filtrer på område", selection: $selectArea) {
-                            Text("🌍").tag("")
-                            ForEach(filterArea, id: \.self) {
-                                area in Text(area).tag(area)
-                            }
-                        }
-                    }
-                    
-                    
-                    
-                    
-                    VStack{
-//                        Text("Filtrer på ingrediens")
-                        Picker("Filtrer på ingrediens", selection: $selectIngredient) {
-                            Text("🌍").tag("")
-//                            ForEach(filterIngredient, id: \.self) {
-                                
-//          REMOVE?
-//                                ingredient in Text(ingredient).tag(ingredient)
-//                            }
-                        }
-                    }
-                    
-                    
-                    
-                }
-                TextField("Søk matrett på navn", text: $searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-            }
-            .foregroundColor(.brandPrimary)
-            .padding()
+            //            Text("Title on top")
+            //            .navigationTitle("Title on top")
             
             
             
             
-//      MEAL VERTICAL FULL LIST VIEW:
             
-            VStack{
+            
+            //      MEAL VERTICAL FULL LIST VIEW:
+            
+            VStack(alignment: .leading){
                 List (loadFilteredMeals, id: \.idMeal) { mealItems in
                     VStack (alignment: .leading) {
                         
                         NavigationLink {
                             
                             ScrollView {
-                            
-                            Button(action: {
-                                toggleFavorite(mealItems.idMeal)
-                            }) {
-                                if setFavorite.contains(mealItems.idMeal) {
-                                    Image(systemName: "star.fill")
-                                } else {
-                                    Image(systemName: "star")
-                                }
-                            }
-                            
-                            VStack(alignment: .center) {
                                 
-                                
-                                if let mealImageURL = URL(string: mealItems.strMealThumb) {
-                                    AsyncImage(url: mealImageURL) { phase in
-                                        switch phase {
-                                        case .success(let image):
-                                            image
-                                                .resizable()
-                                                .scaledToFit()
-                                                .cornerRadius(100)
-                                        case .failure:
-                                            Image(systemName: "photo")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .cornerRadius(100)
-                                        case .empty:
-                                            Image(systemName: "photo")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .cornerRadius(100)
-                                        @unknown default:
-                                            fatalError()
-                                        }
+                                Button(action: {
+                                    toggleFavorite(mealItems.idMeal)
+                                }) {
+                                    if setFavorite.contains(mealItems.idMeal) {
+                                        Image(systemName: "star.fill")
+                                    } else {
+                                        Image(systemName: "star")
                                     }
-//                                    HStack {
-//                                        Text("\(mealItems.strMeal)").fontWeight(.bold)
-//                                        Text("\(mealItems.strMeal)")
-//                                    }
-//                                    .foregroundColor(.brandPrimary)
+                                }
+                                
+                                VStack(alignment: .center) {
                                     
-//                                    VStack {
-                                    VStack(alignment: .leading) {
-                                        VStack(alignment: .leading) {
-                                            Text("Name: ").fontWeight(.bold)
-                                            Text("\(mealItems.strMeal)")
+                                    
+                                    if let mealImageURL = URL(string: mealItems.strMealThumb) {
+                                        AsyncImage(url: mealImageURL) { phase in
+                                            switch phase {
+                                            case .success(let image):
+                                                image
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .cornerRadius(100)
+                                            case .failure:
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .cornerRadius(100)
+                                            case .empty:
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .cornerRadius(100)
+                                            @unknown default:
+                                                fatalError()
+                                            }
                                         }
-                                        .padding()
+                                        //                                    HStack {
+                                        //                                        Text("\(mealItems.strMeal)").fontWeight(.bold)
+                                        //                                        Text("\(mealItems.strMeal)")
+                                        //                                    }
+                                        //                                    .foregroundColor(.brandPrimary)
                                         
+                                        //                                    VStack {
                                         VStack(alignment: .leading) {
-                                            Text("Area: ").fontWeight(.bold)
-                                            Text("\(mealItems.strArea)")
+                                            VStack(alignment: .leading) {
+                                                Text("Name: ").fontWeight(.bold)
+                                                Text("\(mealItems.strMeal)")
+                                            }
+                                            .padding()
+                                            
+                                            VStack(alignment: .leading) {
+                                                Text("Area: ").fontWeight(.bold)
+                                                Text("\(mealItems.strArea)")
+                                            }
+                                            .padding()
+                                            
+                                            VStack(alignment: .leading) {
+                                                Text("Category: ").fontWeight(.bold)
+                                                Text("\(mealItems.strCategory)")
+                                            }
+                                            .padding()
+                                            
+                                            VStack(alignment: .leading) {
+                                                Text("You need: ").fontWeight(.bold)
+                                                Text("\(mealItems.measuredIngredient())")
+                                            }
+                                            .padding()
+                                            
+                                            VStack(alignment: .leading) {
+                                                Text("Instructions: ").fontWeight(.bold)
+                                                Text("\(mealItems.strInstructions)")
+                                            }
+                                            .padding()
                                         }
-                                        .padding()
                                         
-                                        VStack(alignment: .leading) {
-                                            Text("Category: ").fontWeight(.bold)
-                                            Text("\(mealItems.strCategory)")
-                                        }
                                         .padding()
-                                        
-                                        VStack(alignment: .leading) {
-                                            Text("You need: ").fontWeight(.bold)
-                                            Text("\(mealItems.measuredIngredient())")
-                                        }
-                                        .padding()
-                                        
-                                        VStack(alignment: .leading) {
-                                            Text("Instructions: ").fontWeight(.bold)
-                                            Text("\(mealItems.strInstructions)")
-                                        }
-                                        .padding()
+                                        .foregroundColor(.brandPrimary)
                                     }
-
-                                    .padding()
-                                    .foregroundColor(.brandPrimary)
                                 }
-                            }
                             }
                             
                             Spacer()
@@ -249,10 +194,11 @@ struct SearchView: View {
                             
                             
                             //       PREVIEW in List VIEW
-                           
+                            
                             
                             VStack {
                                 HStack {
+                                    
                                     HStack {
                                         if let mealImageURL = URL(string: mealItems.strMealThumb) {
                                             AsyncImage(url: mealImageURL) { phase in
@@ -287,26 +233,28 @@ struct SearchView: View {
                                             Text("\(mealItems.strCategory)")
                                         }
                                     }
-                                    Spacer()
-
                                     
-//      refracture away from button
-                                        HStack{
-                                            Button(action: {
-                                                toggleFavorite(mealItems.idMeal)
-                                            }) {
-                                                if setFavorite.contains(mealItems.idMeal) {
-                                                    Image(systemName: "star.fill")
-                                                        .foregroundColor(.yellow)
-                                                } else {
-                                                    Image(systemName: "star")
-                                                        .foregroundColor(.yellow)
-                                                }
+                                    
+                                    Spacer()
+                                    
+                                    
+                                    //      refracture away from button
+                                    HStack{
+                                        Button(action: {
+                                            toggleFavorite(mealItems.idMeal)
+                                        }) {
+                                            if setFavorite.contains(mealItems.idMeal) {
+                                                Image(systemName: "star.fill")
+                                                    .foregroundColor(.yellow)
+                                            } else {
+                                                Image(systemName: "star")
+                                                    .foregroundColor(.yellow)
                                             }
                                         }
+                                    }
                                     
-
-                                
+                                    
+                                    
                                     .swipeActions(edge: .leading) {
                                         HStack{
                                             Button(action: {
@@ -321,7 +269,9 @@ struct SearchView: View {
                                                         .foregroundColor(.yellow)
                                                 }
                                             }
+                                            .tint(.yellow)
                                         }
+                                        
                                     }
                                     
                                     .swipeActions(edge: .trailing) {
@@ -338,6 +288,7 @@ struct SearchView: View {
                                                         .foregroundColor(.yellow)
                                                 }
                                             }
+                                            .tint(.green)
                                         }
                                     }
                                     
@@ -352,12 +303,58 @@ struct SearchView: View {
                 }
             }
             .navigationTitle("Søk")
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    
+                    VStack {
+                        
+                        HStack {
+                            TextField("Søk matrett navn", text: $searchText)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .scaledToFill()
+                     
+                            Picker("Filtrer på kategori", selection: $selectCategory) {
+                                Image(systemName: "folder")
+                                ForEach(filterCategory, id: \.self) {
+                                    category in Text(category).tag(category)
+                                }
+                            }
+
+                            
+                            Picker("Filtrer på område", selection: $selectArea) {
+                                Image(systemName: "globe")
+                                ForEach(filterArea, id: \.self) {
+                                    area in Text(area).tag(area)
+                                }
+                            }
+
+                            
+                            Picker("Filtrer på ingrediens", selection: $selectIngredient) {
+                                Image(systemName: "carrot")
+                            }
+
+                        }
+                    }
+                    .scaledToFit()
+                    .foregroundStyle(.brandPrimary)
+                    .tint(.brandPrimary)
+                }
+             }//  Toolbar END
         }
         .onAppear {
             loadMealItems()
             toggleFavorite("")
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
