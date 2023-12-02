@@ -3,7 +3,26 @@ import SwiftUI
 
 struct SearchView: View {
     
+    
+    
+    
+    
+    
+    
+    
+    
     @State private var mealItems: [MealItem] = []
+    
+    
+    
+    
+    @State private var starredMeal: Bool = false
+//    @State private var displayTextColor: Color = .black
+//    var savedMealItems: [[Meal: Any]] = []
+//    var listFromApi: [MealItem] = []
+    
+    @Environment(\.managedObjectContext) var mealDataContext
+    
     @State private var searchText: String = ""
     @State private var selectCategory: String = ""
     @State private var selectArea: String = ""
@@ -11,14 +30,15 @@ struct SearchView: View {
     
     @State private var setFavorite: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "setFavorite") ?? [])
     
-//    @AppStorage("setFavorite") public var isFavorite = false
-    
-    @Environment(\.managedObjectContext) var mealDataContext
+    @State private var saveMeal: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "saveMeal") ?? [])
     
     @State private var isFavorite: Bool = false
     
     
-    //          FILTERED MEALS VIEW
+    
+    
+    
+//              FILTERED MEALS VIEW
     var loadFilteredMeals: [MealItem] {
         if searchText.isEmpty && selectCategory.isEmpty && selectArea.isEmpty {
             return mealItems
@@ -57,6 +77,9 @@ struct SearchView: View {
             return mealItems
         }
     }
+   
+    
+    
     
     
     //          ADD FILTER SEARCH
@@ -79,20 +102,38 @@ struct SearchView: View {
     
     
     
+//    func checkStarredMeal() {
+//        let allIdsChecked = Set(listFromApi.map { $0.id })
+//        let context1Set = Set(savedMealItems.compactMap { ($0["id"] as? String) })
+//
+//        displayTextColor = allIdsChecked.subtracting(context1Set).isEmpty ? .green : .red
+//    }
+//    
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
     
     var body: some View {
         NavigationStack {
-            //            Text("Title on top")
-            //            .navigationTitle("Title on top")
-            
-            
-            
-            
-            
-            
             //      MEAL VERTICAL FULL LIST VIEW:
             
             VStack(alignment: .leading){
@@ -102,17 +143,6 @@ struct SearchView: View {
                         NavigationLink {
                             
                             ScrollView {
-                                
-//                                Button(action: {
-//                                    toggleFavorite(mealItems.idMeal)
-//                                }) {
-//                                    if setFavorite.contains(mealItems.idMeal) {
-//                                        Image(systemName: "star.fill")
-//                                    } else {
-//                                        Image(systemName: "star")
-//                                    }
-//                                }
-                                
                                 VStack(alignment: .center) {
                                     if let mealImageURL = URL(string: mealItems.strMealThumb) {
                                         AsyncImage(url: mealImageURL) { phase in
@@ -142,7 +172,6 @@ struct SearchView: View {
                                         
                                         VStack(alignment: .center) {
                                             VStack(alignment: .center) {
-//                                                Text("Name: ").fontWeight(.bold)
                                                 Text("\(mealItems.strMeal)").fontWeight(.bold)
                                             }
                                             .padding()
@@ -174,13 +203,7 @@ struct SearchView: View {
                             
                         } label: {
                             
-                            
-                            
-                            
-                            
-                            
-                            
-                            //       PREVIEW in List VIEW
+//       PREVIEW in List VIEW
                             
                             
                             VStack {
@@ -250,13 +273,8 @@ struct SearchView: View {
                                             }) {
                                                 if setFavorite.contains(mealItems.idMeal) {
                                                     Image(systemName: "star.fill")
-//                                                        .foregroundColor(.yellow)
-//                                                        .tint(.yellow)
-                                                    
                                                 } else {
                                                     Image(systemName: "star")
-//                                                        .foregroundColor(.yellow)
-//                                                        .tint(.yellow)
                                                 }
                                             }
                                             .tint(.yellow)
@@ -267,15 +285,9 @@ struct SearchView: View {
                                     .swipeActions(edge: .trailing) {
                                         HStack{
                                             Button(action: {
-                                                toggleFavorite(mealItems.idMeal)
+                                                saveMealToMealContext(mealItems.idMeal)
                                             }) {
-                                                if setFavorite.contains(mealItems.idMeal) {
-                                                    Image(systemName: "archivebox")
-//                                                        .tint(.green)
-                                                } else {
-                                                    Image(systemName: "archivebox")
-//                                                        .tint(.green)
-                                                }
+                                                Image(systemName: "archivebox")
                                             }
                                             .tint(.green)
                                         }
@@ -303,23 +315,21 @@ struct SearchView: View {
                                 .scaledToFill()
                      
                             Picker("Filtrer på kategori", selection: $selectCategory) {
-                                Image(systemName: "folder")
+                                Image(systemName: "folder").tag("")
                                 ForEach(filterCategory, id: \.self) {
                                     category in Text(category).tag(category)
                                 }
                             }
-
                             
                             Picker("Filtrer på område", selection: $selectArea) {
-                                Image(systemName: "globe")
+                                Image(systemName: "globe").tag("")
                                 ForEach(filterArea, id: \.self) {
                                     area in Text(area).tag(area)
                                 }
                             }
 
-                            
                             Picker("Filtrer på ingrediens", selection: $selectIngredient) {
-                                Image(systemName: "carrot")
+                                Image(systemName: "carrot").tag("")
                             }
 
                         }
@@ -337,64 +347,58 @@ struct SearchView: View {
     }
     
     
+ 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     func loadMealItems() {
-            APIController.getAllMeals { loadedMealItems in DispatchQueue.main.async {
+        APIController.getAllMeals { loadedMealItems in
+            DispatchQueue.main.async {
                 self.mealItems = loadedMealItems
             }
         }
     }
+
     
-    
-    //          ADD TOGGLE FAVORITE
     
     func toggleFavorite(_ id: String) {
-        // Load the set of favorite IDs from UserDefaults
-        if let savedFavoriteMeals = UserDefaults.standard.array(forKey: "savedFavoriteMeals") as? [String] {
-            setFavorite = Set(savedFavoriteMeals)
-        } else {
-            setFavorite = Set()
+           if setFavorite.contains(id) {
+               setFavorite.remove(id)
+               print("Removed meal \(id) from favorites")
+           } else {
+               setFavorite.insert(id)
+               print("Added meal \(id) to favorites")
+           }
+
+           // Save the updated set of favorite IDs to UserDefaults
+           UserDefaults.standard.set(Array(setFavorite), forKey: "setFavorite")
+       }
+    
+  
+    func saveMealToMealContext(_ id: String) {
+            
+            // Check if the item is already marked as a favorite
+            if saveMeal.contains(id) {
+                
+                // Check if the item exists in the mealItems array
+                if let index = mealItems.firstIndex(where: { $0.idMeal == id }) {
+
+                    print("Item \(id) already exists")
+                    mealItems.remove(at: index)
+
+                    return
+                }
+            } else {
+                
+// Item is not in favorites, add it
+                saveMeal.insert(id)
+                if let selectedMeal = mealItems.first(where: { $0.idMeal == id }) {
+                    createMeal(from: selectedMeal)
+                } else {
+                    print("Meal with ID \(id) not found.")
+                }
+            }
         }
 
-        // Check if the item is already marked as a favorite
-        if setFavorite.contains(id) {
-            // Check if the item exists in the mealItems array
-            if mealItems.firstIndex(where: { $0.idMeal == id }) != nil {
-                // Item is already in favorites and exists in the mealItems array, do nothing
-            } else {
-                // Item is already in favorites but not in the mealItems array, remove it
-                setFavorite.remove(id)
-            }
-        } else {
-            // Item is not in favorites, add it
-            setFavorite.insert(id)
-
-            if let selectedMeal = mealItems.first(where: { $0.idMeal == id }) {
-                createMeal(from: selectedMeal)
-            } else {
-                print("Meal with ID \(id) not found.")
-            }
-        }
-
-        // Save the updated set of favorite IDs to UserDefaults
-        UserDefaults.standard.set(Array(setFavorite), forKey: "savedFavoriteMeals")
-    }
-
-    
-    
-    
-//    func saveToDatabase(){
-//        print("")
-//    }
     
     
     

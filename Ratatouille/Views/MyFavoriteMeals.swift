@@ -30,8 +30,6 @@ struct MyFavoriteMeals: View {
                                 Button(action: {
                                     toggleArchivedStatus(meal)
                                 }) {
-                                    //                            Text(meal.archived ? "Unarchive" : "Archive")
-                                    //                                .foregroundColor(meal.archived ? .green : .red)
                                     Image(systemName: "archivebox")
                                 }
                                 .tint(.red)
@@ -50,24 +48,31 @@ struct MyFavoriteMeals: View {
             
         }
     }
+
     
     private func toggleArchivedStatus(_ meal: Meal) {
         withAnimation {
             meal.isArchived.toggle()
-            
+
             // If archived, move to Archived entity
             if meal.isArchived {
                 let archivedMeal = Archived(context: viewContext)
                 archivedMeal.strMeal = meal.strMeal
                 archivedMeal.strCategory = meal.strCategory
-                
-//                toggleFavorite(/*T##String*/)
+
+                // Delete the original Meal entity from the context
                 viewContext.delete(meal)
             }
-            
-            try? viewContext.save()
+
+            do {
+                // Save the changes to the Core Data persistent store
+                try viewContext.save()
+            } catch {
+                print("Error saving context: \(error)")
+            }
         }
     }
+
 }
 
     #Preview {

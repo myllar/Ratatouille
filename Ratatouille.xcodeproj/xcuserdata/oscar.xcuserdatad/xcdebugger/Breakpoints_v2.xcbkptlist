@@ -14,8 +14,8 @@
             filePath = "Ratatouille/Views/SearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "SearchView"
             landmarkType = "14">
          </BreakpointContent>
@@ -23,20 +23,20 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7D7A323C-196A-4A97-8A57-E8032A1A7F54"
+            uuid = "BDBD6A93-CEE9-4B41-9276-724611726134"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ratatouille/Views/SearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "SearchView"
             landmarkType = "14">
             <Locations>
                <Location
-                  uuid = "7D7A323C-196A-4A97-8A57-E8032A1A7F54 - a0d32776958a0ce5"
+                  uuid = "BDBD6A93-CEE9-4B41-9276-724611726134 - a0d32776958a0ad7"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -46,99 +46,24 @@
                   urlString = "file:///Users/oscar/Documents/iOS%20EXAM/PG5602%20H2023/Ratatouille/Ratatouille/Views/SearchView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "68">
-               </Location>
-               <Location
-                  uuid = "7D7A323C-196A-4A97-8A57-E8032A1A7F54 - a622f33b79e4713d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ratatouille.SearchView.isFavorite.getter : Swift.Bool"
-                  moduleName = "Ratatouille"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oscar/Documents/iOS%20EXAM/PG5602%20H2023/Ratatouille/Ratatouille/Views/SearchView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
-                  uuid = "7D7A323C-196A-4A97-8A57-E8032A1A7F54 - 61ba7e3831375f3b"
+                  uuid = "BDBD6A93-CEE9-4B41-9276-724611726134 - 39f059c492a23e36"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Ratatouille.SearchView.isFavorite.setter : Swift.Bool"
+                  symbolName = "Ratatouille.SearchView.init(mealDataContext: SwiftUI.Environment&lt;__C.NSManagedObjectContext&gt;) -&gt; Ratatouille.SearchView"
                   moduleName = "Ratatouille"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/oscar/Documents/iOS%20EXAM/PG5602%20H2023/Ratatouille/Ratatouille/Views/SearchView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  uuid = "7D7A323C-196A-4A97-8A57-E8032A1A7F54 - a2659eeed9e45d0a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ratatouille.SearchView.isFavorite.modify : Swift.Bool"
-                  moduleName = "Ratatouille"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oscar/Documents/iOS%20EXAM/PG5602%20H2023/Ratatouille/Ratatouille/Views/SearchView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  uuid = "7D7A323C-196A-4A97-8A57-E8032A1A7F54 - 9ddd19df7a2f6e1e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ratatouille.SearchView.isFavorite.modify : Swift.Bool with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "Ratatouille"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oscar/Documents/iOS%20EXAM/PG5602%20H2023/Ratatouille/%3Ccompiler-generated%3E"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "7D7A323C-196A-4A97-8A57-E8032A1A7F54 - c7b35c1a34071b41"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ratatouille.SearchView.$isFavorite.getter : SwiftUI.Binding&lt;Swift.Bool&gt;"
-                  moduleName = "Ratatouille"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oscar/Documents/iOS%20EXAM/PG5602%20H2023/Ratatouille/Ratatouille/Views/SearchView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "7D7A323C-196A-4A97-8A57-E8032A1A7F54 - b1a3623b0cb1a52f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "default argument 0 of Ratatouille.SearchView.init(isFavorite: Swift.Bool, mealDataContext: SwiftUI.Environment&lt;__C.NSManagedObjectContext&gt;) -&gt; Ratatouille.SearchView"
-                  moduleName = "Ratatouille"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oscar/Documents/iOS%20EXAM/PG5602%20H2023/Ratatouille/Ratatouille/Views/SearchView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "1140">
                </Location>
             </Locations>
          </BreakpointContent>
