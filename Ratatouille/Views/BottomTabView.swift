@@ -13,14 +13,22 @@ struct BottomTabView: View {
     var body: some View {
         TabView {
 
-            SearchView()
-                .tabItem { Label("Søk", systemImage: "doc.text.magnifyingglass") }
-            //add icon for darkmode
-//            MealListView()
+            
+            EditAreaView()
+                .tabItem { Label("Mine oppskrifter", systemImage: "pencil") }
+            EditCategoryView()
+                .tabItem { Label("Mine oppskrifter", systemImage: "pencil") }
+            
+            
+            
             MyFavoriteMeals()
             //                Text("Import MyRecipesView")
                 .tabItem { Label("Mine oppskrifter", systemImage: "takeoutbag.and.cup.and.straw") }
             //add icon for darkmode
+            SearchView()
+                .tabItem { Label("Søk", systemImage: "doc.text.magnifyingglass") }
+            //add icon for darkmode
+//            MealListView()
             ArchiveView()
                 .tabItem { Label("Arkiverte", systemImage: "doc.text.magnifyingglass") }
 
