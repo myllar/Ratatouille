@@ -8,6 +8,8 @@
 import Foundation
 
 struct APIController {
+    
+    
     static func getAllMeals(completion: @escaping ([MealItem]) -> Void){
         let apiURL = URL(string:
 //         "https://www.themealdb.com/api/json/v1/1/search.php?s=Cajun")!
@@ -29,6 +31,9 @@ struct APIController {
             }
         }
     }
+    
+    
+    
     
     //Test comment
     

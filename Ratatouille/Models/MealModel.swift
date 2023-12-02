@@ -1,6 +1,10 @@
 import Foundation
 import UIKit
 
+
+
+
+
 struct MealItem: Codable, Identifiable {
     let idMeal: String
     let strMeal: String

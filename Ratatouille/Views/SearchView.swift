@@ -11,11 +11,20 @@ struct SearchView: View {
     
     @State private var setFavorite: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "setFavorite") ?? [])
     
-    @AppStorage("setFavorite") public var isFavorite = false
-    
-    
+//    @AppStorage("setFavorite") public var isFavorite = false
     
     @Environment(\.managedObjectContext) var mealDataContext
+    
+    
+    
+
+    @State private var isFavorite: Bool = false
+    
+//    @Published var isFavorite: Bool = false
+        
+        
+        
+        
     
     
     //          FILTERED MEALS VIEW
@@ -244,77 +253,101 @@ struct SearchView: View {
                             
                             VStack {
                                 HStack {
-                                    if let mealImageURL = URL(string: mealItems.strMealThumb) {
-                                        AsyncImage(url: mealImageURL) { phase in
-                                            switch phase {
-                                            case .success(let image):
-                                                image
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .cornerRadius(100)
-                                                    .padding()
-                                            case .failure:
-                                                Image(systemName: "photo")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .cornerRadius(100)
-                                                    .padding()
-                                            case .empty:
-                                                Image(systemName: "photo")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .cornerRadius(100)
-                                                    .padding()
-                                            @unknown default:
-                                                fatalError()
+                                    HStack {
+                                        if let mealImageURL = URL(string: mealItems.strMealThumb) {
+                                            AsyncImage(url: mealImageURL) { phase in
+                                                switch phase {
+                                                case .success(let image):
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .cornerRadius(100)
+                                                        .padding()
+                                                case .failure:
+                                                    Image(systemName: "photo")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .cornerRadius(100)
+                                                        .padding()
+                                                case .empty:
+                                                    Image(systemName: "photo")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .cornerRadius(100)
+                                                        .padding()
+                                                @unknown default:
+                                                    fatalError()
+                                                }
                                             }
                                         }
+                                        
+                                        
+                                        VStack{
+                                            Text("\(mealItems.strMeal)").fontWeight(.bold)
+                                            Text("\(mealItems.strCategory)")
+                                        }
                                     }
+                                    Spacer()
+
                                     
-                                    
-                                    Text("Name: \(mealItems.strMeal)")
-                                    Text("Area: \(mealItems.strArea)")
-                                    Text("Category: \(mealItems.strCategory)")
-                                    
-                                    
-//                                        .swipeActions(edge: HorizontalEdge .leading) {
+//      refracture away from button
                                         HStack{
                                             Button(action: {
                                                 toggleFavorite(mealItems.idMeal)
                                             }) {
                                                 if setFavorite.contains(mealItems.idMeal) {
                                                     Image(systemName: "star.fill")
-                                                        .foregroundColor(.red)
+                                                        .foregroundColor(.yellow)
                                                 } else {
                                                     Image(systemName: "star")
-                                                        .foregroundColor(.green)
+                                                        .foregroundColor(.yellow)
                                                 }
                                             }
                                         }
                                     
 
                                 
-                                    .swipeActions(edge: .trailing) {
+                                    .swipeActions(edge: .leading) {
                                         HStack{
                                             Button(action: {
                                                 toggleFavorite(mealItems.idMeal)
                                             }) {
                                                 if setFavorite.contains(mealItems.idMeal) {
                                                     Image(systemName: "star.fill")
-                                                        .foregroundColor(.red)
+                                                        .foregroundColor(.yellow)
                                                     
                                                 } else {
                                                     Image(systemName: "star")
-                                                        .foregroundColor(.green)
+                                                        .foregroundColor(.yellow)
                                                 }
                                             }
                                         }
                                     }
                                     
+                                    .swipeActions(edge: .trailing) {
+                                        HStack{
+                                            Button(action: {
+                                                toggleFavorite(mealItems.idMeal)
+                                            }) {
+                                                if setFavorite.contains(mealItems.idMeal) {
+                                                    Image(systemName: "archivebox")
+                                                        .foregroundColor(.green)
+                                                    
+                                                } else {
+                                                    Image(systemName: "star")
+                                                        .foregroundColor(.yellow)
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+                                    
+                                    
                                 }
                             }
                         }
                         .foregroundColor(.brandPrimary)
+                        .frame(height: 100)
                     }
                 }
             }
@@ -322,6 +355,7 @@ struct SearchView: View {
         }
         .onAppear {
             loadMealItems()
+            toggleFavorite("")
         }
     }
     
@@ -334,33 +368,54 @@ struct SearchView: View {
         }
     }
     
+    
     //          ADD TOGGLE FAVORITE
     
     func toggleFavorite(_ id: String) {
-            if setFavorite.contains(id) {
-                setFavorite.remove(id)
-                
-                deleteMeal(withId: id)
-                //
+        // Load the set of favorite IDs from UserDefaults
+        if let savedFavoriteMeals = UserDefaults.standard.array(forKey: "savedFavoriteMeals") as? [String] {
+            setFavorite = Set(savedFavoriteMeals)
+        } else {
+            setFavorite = Set()
+        }
+
+        // Check if the item is already marked as a favorite
+        if setFavorite.contains(id) {
+            // Check if the item exists in the mealItems array
+            if mealItems.firstIndex(where: { $0.idMeal == id }) != nil {
+                // Item is already in favorites and exists in the mealItems array, do nothing
             } else {
-                setFavorite.insert(id)
-                
-                if let selectedMeal = mealItems.first(where: {$0.idMeal == id}) {
-                    createMeal(from: selectedMeal)
-                }
+                // Item is already in favorites but not in the mealItems array, remove it
+                setFavorite.remove(id)
             }
-            
-            UserDefaults.standard.set(Array(setFavorite), forKey: "savedFavoriteMeals")
+        } else {
+            // Item is not in favorites, add it
+            setFavorite.insert(id)
+
+            if let selectedMeal = mealItems.first(where: { $0.idMeal == id }) {
+                createMeal(from: selectedMeal)
+            } else {
+                print("Meal with ID \(id) not found.")
+            }
+        }
+
+        // Save the updated set of favorite IDs to UserDefaults
+        UserDefaults.standard.set(Array(setFavorite), forKey: "savedFavoriteMeals")
     }
+
     
     
-    func deleteMeal(withId: String) {
-        // IMPLEMENT FUNCTIONALITY
-    }
+    
+//    func saveToDatabase(){
+//        print("")
+//    }
+    
+    
+    
     
     func createMeal(from APIController: MealItem) {
         let newMeal = Meal(context: mealDataContext)
-        
+
         newMeal.idMeal = APIController.idMeal
         newMeal.strMeal = APIController.strMeal
         newMeal.strArea = APIController.strArea
@@ -383,6 +438,7 @@ struct SearchView: View {
     
     
     
+
     
 }
 #Preview {

@@ -21,7 +21,13 @@ struct RatatouilleApp: App {
     @AppStorage("isDarkMode") public var isDarkMode = true
     
     
+    
+    
+    
     var body: some Scene {
+        
+        
+        
         
         WindowGroup {
             
