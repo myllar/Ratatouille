@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		550BF36C2B17951C008F5B9C /* ButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BF36B2B17951C008F5B9C /* ButtonsController.swift */; };
 		550BF36E2B1796D7008F5B9C /* VListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BF36D2B1796D7008F5B9C /* VListView.swift */; };
+		5576F4612B1BEC56001B50E9 /* EditArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576F4602B1BEC56001B50E9 /* EditArea.swift */; };
 		559983502B1A8E8E0048019E /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5599834F2B1A8E8E0048019E /* SplashView.swift */; };
 		559983552B1B9B540048019E /* databaseManagerRatatouille.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559983542B1B9B540048019E /* databaseManagerRatatouille.swift */; };
 		5599835B2B1BA3FB0048019E /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 5599835A2B1BA3FB0048019E /* Data */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		550BF36B2B17951C008F5B9C /* ButtonsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsController.swift; sourceTree = "<group>"; };
 		550BF36D2B1796D7008F5B9C /* VListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VListView.swift; sourceTree = "<group>"; };
+		5576F4602B1BEC56001B50E9 /* EditArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditArea.swift; sourceTree = "<group>"; };
 		5599834F2B1A8E8E0048019E /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		559983542B1B9B540048019E /* databaseManagerRatatouille.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = databaseManagerRatatouille.swift; sourceTree = "<group>"; };
 		5599835A2B1BA3FB0048019E /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				55E03CCE2B08BF1B006890C8 /* MyFavoriteMeals.swift */,
 				55E03CBA2B028D2C006890C8 /* SettingsView.swift */,
 				5599834F2B1A8E8E0048019E /* SplashView.swift */,
+				5576F4602B1BEC56001B50E9 /* EditArea.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				55E03CC92B069599006890C8 /* BottomTabView.swift in Sources */,
 				559983502B1A8E8E0048019E /* SplashView.swift in Sources */,
 				55B86EA52B0D0BC100E42B9C /* DataController.swift in Sources */,
+				5576F4612B1BEC56001B50E9 /* EditArea.swift in Sources */,
 				55E03CBB2B028D2C006890C8 /* SettingsView.swift in Sources */,
 				55E03CB92B028CE4006890C8 /* SearchView.swift in Sources */,
 				55E03CCD2B08AFA8006890C8 /* CRUDTestView.swift in Sources */,

@@ -102,36 +102,6 @@ struct SearchView: View {
     
     
     
-//    func checkStarredMeal() {
-//        let allIdsChecked = Set(listFromApi.map { $0.id })
-//        let context1Set = Set(savedMealItems.compactMap { ($0["id"] as? String) })
-//
-//        displayTextColor = allIdsChecked.subtracting(context1Set).isEmpty ? .green : .red
-//    }
-//    
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     var body: some View {
         NavigationStack {
             //      MEAL VERTICAL FULL LIST VIEW:
@@ -202,9 +172,9 @@ struct SearchView: View {
                             Spacer()
                             
                         } label: {
+        
                             
 //       PREVIEW in List VIEW
-                            
                             
                             VStack {
                                 HStack {
@@ -249,7 +219,7 @@ struct SearchView: View {
                                     
                                     Spacer()
                                     
-                                    //      refracture away from button
+//      refracture away from button
                                     HStack{
                                         Button(action: {
                                             toggleFavorite(mealItems.idMeal)
@@ -342,7 +312,7 @@ struct SearchView: View {
         }
         .onAppear {
             loadMealItems()
-            toggleFavorite("")
+//            toggleFavorite("")
         }
     }
     
