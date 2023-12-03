@@ -8,19 +8,12 @@ struct SearchView: View {
     
     @Environment(\.managedObjectContext) var viewContext
     
-    
     @FetchRequest(
         entity: Meal.entity(),
         sortDescriptors: [
             NSSortDescriptor(keyPath: \Meal.strMeal, ascending: true)
         ]
     ) var savedMeals: FetchedResults<Meal>
-    
-    
-    
-    
-    
-    
     
     @State private var searchText: String = ""
     @State private var selectCategory: String = ""
@@ -60,7 +53,7 @@ struct SearchView: View {
                 mealItem.strArea == selectArea
             }
             
-            
+
 //        }else if !selectIngredient.isEmpty{
 //            return mealItems.filter { mealItem in
 //                mealItem.strIngredient == selectIngredient
@@ -168,6 +161,7 @@ struct SearchView: View {
                                 }
                             }
                             
+//redundant spacer?
                             Spacer()
                             
                         } label: {
@@ -193,21 +187,21 @@ struct SearchView: View {
                                                         .scaledToFit()
                                                         .cornerRadius(100)
                                                         .padding()
-                                                        .frame(width: 150, height: 150)
+                                                        .frame(height: 80)
                                                 case .failure:
                                                     Image(systemName: "photo")
                                                         .resizable()
                                                         .scaledToFit()
                                                         .cornerRadius(100)
                                                         .padding()
-                                                        .frame(width: 150, height: 150)
+                                                        .frame(height: 80)
                                                 case .empty:
                                                     Image(systemName: "photo")
                                                         .resizable()
                                                         .scaledToFit()
                                                         .cornerRadius(100)
                                                         .padding()
-                                                        .frame(width: 150, height: 150)
+                                                        .frame(height: 80)
                                                 @unknown default:
                                                     fatalError("Unknown error")
                                                 }
@@ -302,9 +296,9 @@ struct SearchView: View {
                                 }
                             }
 
-                            Picker("Filtrer på ingrediens", selection: $selectIngredient) {
-                                Image(systemName: "carrot").tag("")
-                            }
+//                            Picker("Filtrer på ingrediens", selection: $selectIngredient) {
+//                                Image(systemName: "carrot").tag("")
+//                            }
 
                         }
                     }
@@ -321,28 +315,7 @@ struct SearchView: View {
     }
     
     
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 
     func loadMealItems() {
@@ -352,8 +325,6 @@ struct SearchView: View {
             }
         }
     }
-
-    
     
     func toggleFavorite(_ id: String) {
            if setFavorite.contains(id) {
@@ -367,40 +338,7 @@ struct SearchView: View {
            // Save the updated set of favorite IDs to UserDefaults
            UserDefaults.standard.set(Array(setFavorite), forKey: "setFavorite")
        }
-    
-  
-//    func saveMealToMealContext(_ id: String) {
-//            
-//            // Check if the item is already marked as a favorite
-//            if saveMeal.contains(id) {
-//                
-//                // Check if the item exists in the mealItems array
-//                if let index = mealItems.firstIndex(where: { $0.idMeal == id }) {
-//
-//                    print("Item \(id) already exists")
-//                    mealItems.remove(at: index)
-//
-//                    return
-//                }
-//            } else {
-//                
-//// Item is not in favorites, add it
-//                saveMeal.insert(id)
-//                if let selectedMeal = mealItems.first(where: { $0.idMeal == id }) {
-//                    createMeal(from: selectedMeal)
-//                } else {
-//                    print("Meal with ID \(id) not found.")
-//                }
-//            }
-//        }
 
-    
-    
-    
-    
-    
-    
-    
     
     func saveMealToMealContext(_ id: String) {
         // Check if the meal with the given ID is already in the "Meal" context

@@ -26,5 +26,6 @@ extension Meal {
     @NSManaged public var strMeal: String?
     @NSManaged public var strMealThumb: String?
     @NSManaged public var strMeasure: String?
+    
 
 }

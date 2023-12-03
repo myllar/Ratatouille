@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "titleHeader.png",
+      "filename" : "ratPoetry.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "titleHeader 1.png",
+      "filename" : "ratPoetry 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "titleHeader 2.png",
+      "filename" : "ratPoetry 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

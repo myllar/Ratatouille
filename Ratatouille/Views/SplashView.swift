@@ -18,27 +18,31 @@ struct SplashView: View {
             if self.isActive {
                 BottomTabView()
             } else {
-                Rectangle()
-                    .ignoresSafeArea()
-                    .background(Color.black)
-                ZStack{
-                    Image("image_splashView")
-                        .padding()
-                        .scaleEffect(animateScale)
-                }
-                .onAppear {
-                    let animateSplash = Animation.easeInOut(duration: 0.9)
-                    let infinite = animateSplash.repeatForever(autoreverses: true)
-                    withAnimation (infinite) {
-                        animateScale = 1.0
+                    ZStack{
+                        Rectangle()
+                            .scaledToFill()
+                            .ignoresSafeArea()
+                            Color.black
+                        Image("image_splashView")
+                            .aspectRatio(contentMode: .fit)
+                            .padding()
+                            .scaleEffect(animateScale)
+                    }
+                
+//onAppear SplashView
+                    .onAppear {
+                        let animateSplash = Animation.easeInOut(duration: 0.9)
+                        let infinite = animateSplash.repeatForever(autoreverses: true)
+                        withAnimation (infinite) {
+                            animateScale = 1.0
+                        }
                     }
                 }
             }
-        }
-    
+         
+//onAppear BottomTabView when isActive
         .onAppear() {
-            //3e+9 == 3 seconds, from nano
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 withAnimation {
                     self.isActive = true
                 }

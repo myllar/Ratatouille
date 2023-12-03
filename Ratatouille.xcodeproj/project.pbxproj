@@ -185,7 +185,6 @@
 				55E03CC82B069599006890C8 /* BottomTabView.swift */,
 				55B86EA82B0D2E2D00E42B9C /* ArchiveView.swift */,
 				55E03CB82B028CE4006890C8 /* SearchView.swift */,
-				5599835E2B1BE66C0048019E /* DataModel.xcdatamodeld */,
 				55E03CCE2B08BF1B006890C8 /* MyFavoriteMeals.swift */,
 				55E03CBA2B028D2C006890C8 /* SettingsView.swift */,
 				5599834F2B1A8E8E0048019E /* SplashView.swift */,
@@ -202,6 +201,7 @@
 				55B86EA62B0D2C9B00E42B9C /* ArchivedMealModel.swift */,
 				55B86EA42B0D0BC100E42B9C /* DataController.swift */,
 				5599835C2B1BADD10048019E /* FavoriteModel.swift */,
+				5599835E2B1BE66C0048019E /* DataModel.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -704,8 +704,7 @@
 				5599835F2B1BE66C0048019E /* MealCoreDataModel.xcdatamodel */,
 			);
 			currentVersion = 5599835F2B1BE66C0048019E /* MealCoreDataModel.xcdatamodel */;
-			name = DataModel.xcdatamodeld;
-			path = ../Models/DataModel.xcdatamodeld;
+			path = DataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

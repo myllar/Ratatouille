@@ -9,36 +9,20 @@ import SwiftUI
 
 @main
 struct RatatouilleApp: App {
-    
-//    @AppStorage("isDarkMode") private var isDarkMode = false
-
-//    @Environment(\.colorScheme) var isDarkMode
-    
-//    @StateObject var userSettings = SettingsView()
-    
     @StateObject private var dataController = DataController()
-    
     @AppStorage("isDarkMode") public var isDarkMode = true
-    
-    
-    
-    
     
     var body: some Scene {
         
         WindowGroup {
-            
             VStack {
-                //                Image("HERO_main")
-//                BottomTabView()
-                SplashView()
-                
+                BottomTabView()
+//                SplashView()
                     .environment(\.managedObjectContext, dataController.container.viewContext)
             }
-//            check local storage for selected colorscheme (from settingsView):
+//check for changes in app settings
             .preferredColorScheme(isDarkMode ? .dark : .light)
         }
-        
     }
 }
 

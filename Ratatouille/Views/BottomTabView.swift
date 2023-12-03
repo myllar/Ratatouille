@@ -11,36 +11,49 @@ struct BottomTabView: View {
     
     
     var body: some View {
-        TabView {
-            
-            MyFavoriteMeals()
-                .tabItem { Label("Mine oppskrifter", systemImage: "takeoutbag.and.cup.and.straw")
-                }
-            //add icon for darkmode
-            
-            SearchView()
-                .tabItem { Label("Søk", systemImage: "doc.text.magnifyingglass")
-                }
-            //add icon for darkmode
-            
-            ArchiveView()
-                .tabItem { Label("Arkiverte", systemImage: "doc.text.magnifyingglass")
-                }
-            
-            SettingsView()
-                .tabItem { Label("Innstillinger", systemImage: "gearshape")
-                }
-            //add icon for darkmode
+        
+        VStack{
+//            VStack {
+            Image("image_titleImage")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+                .frame(height: 80)
+//                }
             
             
-            
-            EditAreaView()
-                .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
-                }
-            EditCategoryView()
-                .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
-                }
-            
+            TabView {
+                
+                MyFavoriteMeals()
+                    .tabItem { Label("Mine oppskrifter", systemImage: "takeoutbag.and.cup.and.straw")
+                    }
+                //add icon for darkmode
+                
+                SearchView()
+                    .tabItem { Label("Søk", systemImage: "doc.text.magnifyingglass")
+                    }
+                //add icon for darkmode
+                
+                ArchiveView()
+                    .tabItem { Label("Arkiverte", systemImage: "doc.text.magnifyingglass")
+                    }
+                
+                SettingsView()
+                    .tabItem { Label("Innstillinger", systemImage: "gearshape")
+                    }
+                //add icon for darkmode
+                
+                
+                
+                EditAreaView()
+                    .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
+                    }
+                EditCategoryView()
+                    .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
+                    }
+                
+                
+            }
             
         }
         
