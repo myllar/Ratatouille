@@ -26,14 +26,13 @@ struct RatatouilleApp: App {
     
     var body: some Scene {
         
-        
-        
-        
         WindowGroup {
             
             VStack {
                 //                Image("HERO_main")
-                BottomTabView()
+//                BottomTabView()
+                SplashView()
+                
                     .environment(\.managedObjectContext, dataController.container.viewContext)
             }
 //            check local storage for selected colorscheme (from settingsView):

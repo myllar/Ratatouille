@@ -1,27 +1,26 @@
 import SwiftUI
-
+import CoreData
 
 struct SearchView: View {
     
     
-    
-    
-    
-    
-    
-    
-    
     @State private var mealItems: [MealItem] = []
     
+    @Environment(\.managedObjectContext) var viewContext
+    
+    
+    @FetchRequest(
+        entity: Meal.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Meal.strMeal, ascending: true)
+        ]
+    ) var savedMeals: FetchedResults<Meal>
     
     
     
-    @State private var starredMeal: Bool = false
-//    @State private var displayTextColor: Color = .black
-//    var savedMealItems: [[Meal: Any]] = []
-//    var listFromApi: [MealItem] = []
     
-    @Environment(\.managedObjectContext) var mealDataContext
+    
+    
     
     @State private var searchText: String = ""
     @State private var selectCategory: String = ""
@@ -176,6 +175,11 @@ struct SearchView: View {
                             
 //       PREVIEW in List VIEW
                             
+                            
+                    
+                            
+                            
+                            
                             VStack {
                                 HStack {
                                     
@@ -319,6 +323,27 @@ struct SearchView: View {
     
  
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     func loadMealItems() {
         APIController.getAllMeals { loadedMealItems in
@@ -344,22 +369,57 @@ struct SearchView: View {
        }
     
   
+//    func saveMealToMealContext(_ id: String) {
+//            
+//            // Check if the item is already marked as a favorite
+//            if saveMeal.contains(id) {
+//                
+//                // Check if the item exists in the mealItems array
+//                if let index = mealItems.firstIndex(where: { $0.idMeal == id }) {
+//
+//                    print("Item \(id) already exists")
+//                    mealItems.remove(at: index)
+//
+//                    return
+//                }
+//            } else {
+//                
+//// Item is not in favorites, add it
+//                saveMeal.insert(id)
+//                if let selectedMeal = mealItems.first(where: { $0.idMeal == id }) {
+//                    createMeal(from: selectedMeal)
+//                } else {
+//                    print("Meal with ID \(id) not found.")
+//                }
+//            }
+//        }
+
+    
+    
+    
+    
+    
+    
+    
+    
     func saveMealToMealContext(_ id: String) {
+        // Check if the meal with the given ID is already in the "Meal" context
+        let fetchRequestMeal: NSFetchRequest<Meal> = Meal.fetchRequest()
+        fetchRequestMeal.predicate = NSPredicate(format: "idMeal == %@", id)
+        
+        let fetchRequestArchived: NSFetchRequest<Archived> = Archived.fetchRequest()
+        fetchRequestArchived.predicate = NSPredicate(format: "idMeal == %@", id)
+
+        do {
+            let matchingMeals = try viewContext.fetch(fetchRequestMeal)
+            let matchingArchived = try viewContext.fetch(fetchRequestArchived)
             
-            // Check if the item is already marked as a favorite
-            if saveMeal.contains(id) {
+            let combinedContext = matchingMeals + matchingArchived
+
+            if let existingMeal = combinedContext.first {
+                print("Meal \(id) Already exist")
                 
-                // Check if the item exists in the mealItems array
-                if let index = mealItems.firstIndex(where: { $0.idMeal == id }) {
-
-                    print("Item \(id) already exists")
-                    mealItems.remove(at: index)
-
-                    return
-                }
             } else {
-                
-// Item is not in favorites, add it
                 saveMeal.insert(id)
                 if let selectedMeal = mealItems.first(where: { $0.idMeal == id }) {
                     createMeal(from: selectedMeal)
@@ -367,14 +427,16 @@ struct SearchView: View {
                     print("Meal with ID \(id) not found.")
                 }
             }
+        } catch {
+            // Handle error
+            print("Error fetching meal by ID: \(error.localizedDescription)")
         }
+    }
 
     
     
-    
-    
     func createMeal(from APIController: MealItem) {
-        let newMeal = Meal(context: mealDataContext)
+        let newMeal = Meal(context: viewContext)
 
         newMeal.idMeal = APIController.idMeal
         newMeal.strMeal = APIController.strMeal
@@ -388,7 +450,7 @@ struct SearchView: View {
         newMeal.isArchived = APIController.isArchived
         
         do {
-            try mealDataContext.save()
+            try viewContext.save()
             print("Meal successfully saved")
         } catch {
             print("Error, unable to save \(error)")

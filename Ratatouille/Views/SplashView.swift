@@ -10,6 +10,7 @@ import SwiftUI
 struct SplashView: View {
     
     @State var isActive: Bool = false
+    @State var animateScale = 0.0
     
     var body: some View {
         
@@ -18,20 +19,26 @@ struct SplashView: View {
                 BottomTabView()
             } else {
                 Rectangle()
-//                    .ignoresSafeArea()
+                    .ignoresSafeArea()
                     .background(Color.black)
                 ZStack{
                     Image("image_splashView")
-//                        .resizable()
-//                        .scaledToFit()
-                    Spacer()
-                    Text("Hello!")
+                        .padding()
+                        .scaleEffect(animateScale)
+                }
+                .onAppear {
+                    let animateSplash = Animation.easeInOut(duration: 0.9)
+                    let infinite = animateSplash.repeatForever(autoreverses: true)
+                    withAnimation (infinite) {
+                        animateScale = 1.0
+                    }
                 }
             }
         }
     
-        .onAppear() {                                        //3e+9 == 3 seconds, from nano
-            DispatchQueue.main.asyncAfter(deadline: .now() + 300e+9) {
+        .onAppear() {
+            //3e+9 == 3 seconds, from nano
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation {
                     self.isActive = true
                 }

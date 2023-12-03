@@ -67,3 +67,28 @@ struct EditAreaView: View {
 #Preview {
     EditAreaView()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//USE TO FILTER
+//VStack(alignment: .leading){
+//    List (mealItems, id: \.idMeal) { mealItems in
+//        VStack (alignment: .leading) {
+//            Text(mealItems.strMeal)
+//        }
+//    }
+//}
