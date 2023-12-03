@@ -37,10 +37,15 @@ struct EditAreaView: View {
             Section(header: Text("Endre eksisterende landområder")) {
                 
                 VStack{
+                    
                     Text("Velg en matrett du ønsker å endre område for:")
+                    
+                    Text("\(selectedMeal?.strMeal ?? "Ingen valgt")")
+                        .padding()
+                
                     Picker("", selection: $selectedMealID) {
                         ForEach(savedMeals, id: \.idMeal) {
-                            meal in Text(meal.strMeal ?? "fant ikke matrett").tag(meal.idMeal ?? "Fant ikke id")
+                            meal in Text(meal.strMeal ?? "fant ikke matrett").tag(meal.idMeal ?? "Fant ikke Id")
                         }
                         .pickerStyle(DefaultPickerStyle())
                     }
@@ -60,17 +65,8 @@ struct EditAreaView: View {
                 })
             }
             .padding()
-            
-            
-            
-            
-            
-            
-            
 //            Section(header: Text("Redigere landområder")) {
-                
 //                VStack {
-                    
                     VStack{
                         Text("Selected Meal: \(selectedMeal?.strMeal ?? "None")")
                         
