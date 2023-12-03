@@ -35,98 +35,33 @@ struct EditAreaView: View {
     var body: some View {
         List {
             Section(header: Text("Endre eksisterende landområder")) {
-                
                 VStack{
-                    
-                    Text("Velg en matrett du ønsker å endre område for:")
-                    
-                    Text("\(selectedMeal?.strMeal ?? "Ingen valgt")")
-                        .padding()
-                
-                    Picker("", selection: $selectedMealID) {
+                    Picker("Velg en matrett å endre: ", selection: $selectedMealID) {
                         ForEach(savedMeals, id: \.idMeal) {
                             meal in Text(meal.strMeal ?? "fant ikke matrett").tag(meal.idMeal ?? "Fant ikke Id")
                         }
-                        .pickerStyle(DefaultPickerStyle())
                     }
+                        Text("Matrett: \(selectedMeal?.strMeal ?? "Ingen tilgjengelig"), \nOmråde: \(selectedMeal?.strArea ?? "")")
+                        .padding()
                 }
+                
                 TextField("Tast inn nytt område", text: $selectAreaToEdit)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .scaledToFill()
-                
-                Text("Velg en matrett du ønsker å endre område for:")
-                                
-//                Picker("velg landområde", text: )
-                
-                Button(action: {
-                    placeHolderFunction1()
-                }, label: {
-                    Text("Opprett")
-                })
-            }
-            .padding()
-//            Section(header: Text("Redigere landområder")) {
-//                VStack {
-                    VStack{
-                        Text("Selected Meal: \(selectedMeal?.strMeal ?? "None")")
-                        
-                        Picker("Select a Meal", selection: $selectedMealID) {
-                            ForEach(savedMeals, id: \.idMeal) { meal in
-                                Text(meal.strMeal ?? "Unknown Meal")
-                                    .tag(meal.idMeal ?? "")
-                            }
-                        .pickerStyle(DefaultPickerStyle())
-                        .padding()
-                    }
-                    VStack{
-                        TextField("Edit", text: $selectAreaToEdit)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .scaledToFill()
-                    }
-                   
-                    }
-            VStack{
+
                 Button(action: {
                     saveChanges()
                 }) {
-                    Text(successMessage ?? "Save Changes")
+                    Text(successMessage ?? "Lagre endring")
                 }
-                .padding()
-//                }
-                
-//                Picker("Select a Meal", selection: $selectAreaToEdit) {
-//                    ForEach(savedMeals, id: \.self) { meal in
-//                        Text(meal.strMeal ?? "Unknown Meal")
-//                    }
-//                }
-//                
-//                TextField("edit", text: $selectAreaToEdit) {
-//                }
-//                    .textFieldStyle(RoundedBorderTextFieldStyle())
-//                    .scaledToFill()
-//                Button(action: {
-////                    placeHolderFunction2()
-//                    saveChanges()
-//                }, label: {
-//                    Text("Rediger")
-//                })
             }
             .padding()
-            
-            
             
             
             
             
             Section(header: Text("Arkiver landområder")) {
-                TextField("Arkiver", text: $inputPlaceHolder3)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .scaledToFill()
-                Button(action: {
-                    placeHolderFunction3()
-                }, label: {
-                    Text("Arkiver")
-                })
+                Text("placeholder")
             }
             .padding()
         }
@@ -135,7 +70,6 @@ struct EditAreaView: View {
                     selectedMealID = savedMeals.first?.idMeal ?? ""
                 }
     }
-    
     
     
     private var selectedMeal: Meal? {
@@ -148,16 +82,16 @@ struct EditAreaView: View {
                 return
             }
 
-            mealToUpdate.strMeal = selectAreaToEdit
+            mealToUpdate.strArea = selectAreaToEdit
 
             do {
                 try viewContext.save()
                 // Set success message and trigger animation
                 withAnimation {
-                    successMessage = "Success"
+                    successMessage = "Vellykket endring!"
                 }
                 // Clear success message after 1 second
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     withAnimation {
                         successMessage = nil
                     }
