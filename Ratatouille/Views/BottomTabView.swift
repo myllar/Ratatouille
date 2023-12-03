@@ -24,6 +24,16 @@ struct BottomTabView: View {
             
             TabView {
                 
+                EditAreaView()
+                    .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
+                    }
+                EditCategoryView()
+                    .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
+                    }
+                
+                
+                
+                
                 MyFavoriteMeals()
                     .tabItem { Label("Mine oppskrifter", systemImage: "takeoutbag.and.cup.and.straw")
                     }
@@ -45,12 +55,7 @@ struct BottomTabView: View {
                 
                 
                 
-                EditAreaView()
-                    .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
-                    }
-                EditCategoryView()
-                    .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
-                    }
+
                 
                 
             }

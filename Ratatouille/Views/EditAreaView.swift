@@ -11,10 +11,19 @@ struct EditAreaView: View {
     
     @State private var inputPlaceHolder = ""
     
+//    var addArea: ((Meal) -> ())
+//    init(addArea: @escaping ((Meal) -> Void) ) {
+//        self.addArea = addArea
+//    }
+//    @State private var newAreaName = ""
+//    
+//    
+//    
+
     var body: some View {
         List {
             Section(header: Text("Opprette landområder")) {
-//                Text("Hello")
+                //                Text("Hello")
                 TextField("Søk matrett navn", text: $inputPlaceHolder)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .scaledToFill()
@@ -49,11 +58,9 @@ struct EditAreaView: View {
                 })
             }
             .padding()
-            
-           
-            }
         }
-
+    }
+    
     
     
     
@@ -62,8 +69,63 @@ struct EditAreaView: View {
         //add input to Meal context
         
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    func createArea() {
+//        let newArea = Meal(context: viewContext)
+////        
+////        newArea.idMeal = String.idMeal
+////        newArea.strArea = String.strArea
+//        
+//        
+//    }
+    
+    
+    
+//    //FROM CREATE IN SEARCH VIEW
+//    
+//    func createMeal(from APIController: MealItem) {
+//        let newMeal = Meal(context: viewContext)
+//        
+//        newMeal.idMeal = APIController.idMeal
+//        newMeal.strMeal = APIController.strMeal
+//        newMeal.strArea = APIController.strArea
+//        newMeal.strCategory = APIController.strCategory
+//        newMeal.strInstructions = APIController.strInstructions
+//        newMeal.strMealThumb = APIController.strMealThumb
+//        newMeal.strIngredient = APIController.strIngredient
+//        newMeal.strMeasure = APIController.strMeasure
+//        newMeal.isFavorite = APIController.isFavorite
+//        newMeal.isArchived = APIController.isArchived
+//        
+//        do {
+//            try viewContext.save()
+//            print("Meal successfully saved")
+//        } catch {
+//            print("Error, unable to save \(error)")
+//        }
+//    }
+//    
+//    //FROM CREATE IN SEARCH VIEW - END
+    
+    
+    
+    
+    
+    
+    
+    
 }
-
 #Preview {
     EditAreaView()
 }
