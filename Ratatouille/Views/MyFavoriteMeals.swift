@@ -104,9 +104,11 @@ struct MyFavoriteMeals: View {
                     
                         ForEach(meals, id: \.id) { meal in
                             HStack {
-                                VStack(alignment: .leading) {
+                                HStack() {
                                     Text(meal.strMeal ?? "Unknown Meal")
                                     Text(meal.strCategory ?? "Unknown category")
+                                    Text(meal.strArea ?? "Unknown area")
+//                                    Text(meal.strInstructions ?? "Unknown Instructions")
                                 }
                                 
                                 Spacer()
@@ -145,6 +147,7 @@ struct MyFavoriteMeals: View {
                 let archivedMeal = Archived(context: viewContext)
                 archivedMeal.strMeal = meal.strMeal
                 archivedMeal.strCategory = meal.strCategory
+                archivedMeal.strArea = meal.strArea
 
                 // Delete the original Meal entity from the context
                 viewContext.delete(meal)
