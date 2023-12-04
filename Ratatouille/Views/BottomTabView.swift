@@ -24,13 +24,15 @@ struct BottomTabView: View {
             
             TabView {
                 
-                EditAreaView()
-                    .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
-                    }
-                EditCategoryView()
-                    .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
-                    }
                 
+//                ArchiveView()
+//                    .tabItem { Label("Arkiverte", systemImage: "doc.text.magnifyingglass")
+//                    }
+                
+                EditIngredientView()
+                    .tabItem { Label("Mine oppskrifter", systemImage: "pencil")
+                    }
+
                 
                 
                 
@@ -43,10 +45,7 @@ struct BottomTabView: View {
                     .tabItem { Label("Søk", systemImage: "doc.text.magnifyingglass")
                     }
                 //add icon for darkmode
-                
-                ArchiveView()
-                    .tabItem { Label("Arkiverte", systemImage: "doc.text.magnifyingglass")
-                    }
+
                 
                 SettingsView()
                     .tabItem { Label("Innstillinger", systemImage: "gearshape")

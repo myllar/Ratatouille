@@ -3,9 +3,6 @@ import CoreData
 
 struct SearchView: View {
     
-    
-    @State private var mealItems: [MealItem] = []
-    
     @Environment(\.managedObjectContext) var viewContext
     
     @FetchRequest(
@@ -15,6 +12,7 @@ struct SearchView: View {
         ]
     ) var savedMeals: FetchedResults<Meal>
     
+    @State private var mealItems: [MealItem] = []
     @State private var searchText: String = ""
     @State private var selectCategory: String = ""
     @State private var selectArea: String = ""

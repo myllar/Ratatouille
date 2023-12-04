@@ -1,14 +1,13 @@
 //
-//  EditArea.swift
+//  EditIngredientView.swift
 //  Ratatouille
 //
-//  Created by oscar student on 02/12/2023.
+//  Created by oscar student on 04/12/2023.
 //
 
 import SwiftUI
 
-struct EditAreaView: View {
-    
+struct EditIngredientView: View {
     @Environment(\.managedObjectContext) var viewContext
     
     @FetchRequest(
@@ -19,7 +18,7 @@ struct EditAreaView: View {
     ) var savedMeals: FetchedResults<Meal>
     
     @State private var selectedMealID: String?
-    @State private var selectAreaToEdit: String = ""
+    @State private var selectCategoryToEdit: String = ""
     @State private var successMessage: String? = nil
 
     
@@ -27,18 +26,18 @@ struct EditAreaView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Endre eksisterende landområder")) {
+            Section(header: Text("Endre eksisterende Ingredienser")) {
                 VStack{
-                    Picker("Velg en matrett å endre: ", selection: $selectedMealID) {
+                    Picker("Velg en matrett å endre kategori for: ", selection: $selectedMealID) {
                         ForEach(savedMeals, id: \.idMeal) {
-                            meal in Text(meal.strMeal ?? "fant ikke matrett").tag(meal.idMeal ?? "Fant ikke Id")
+                            meal in Text(meal.strMeal ?? "fant ikke kategori").tag(meal.idMeal ?? "Fant ikke Id")
                         }
                     }
-                        Text("Matrett: \(selectedMeal?.strMeal ?? "Ingen"), \nOmråde: \(selectedMeal?.strArea ?? "Ingen")")
+                    Text("Matrett: \(selectedMeal?.strMeal ?? "Ingen"), \nKategori: \(selectedMeal?.strCategory ?? "Ingen")")
                         .padding()
                 }
                 
-                TextField("Tast inn nytt område", text: $selectAreaToEdit)
+                TextField("Tast inn ny kategori", text: $selectCategoryToEdit)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .scaledToFill()
 
@@ -49,15 +48,6 @@ struct EditAreaView: View {
                 }
             }
             .padding()
-//
-////         ADD FLAG
-//            Section(header: Text("Arkiver landområder")) {
-//                VStack{
-//
-//                }
-//            }
-//            .padding()
- 
         }
         .onAppear {
                     selectedMealID = savedMeals.first?.idMeal ?? ""
@@ -73,13 +63,13 @@ struct EditAreaView: View {
     
     
     private func saveChanges() {
-            guard let mealToUpdate = selectedMeal, !selectAreaToEdit.isEmpty else {
+            guard let mealToUpdate = selectedMeal, !selectCategoryToEdit.isEmpty else {
                 print("Error: Meal or Text field nil or empty")
                 return
             }
         
 // WHAT TO EDIT:
-            mealToUpdate.strArea = selectAreaToEdit
+            mealToUpdate.strCategory = selectCategoryToEdit
         
             do {
                 try viewContext.save()
@@ -96,6 +86,7 @@ struct EditAreaView: View {
             }
         }
 }
+
 #Preview {
-    EditAreaView()
+    EditIngredientView()
 }

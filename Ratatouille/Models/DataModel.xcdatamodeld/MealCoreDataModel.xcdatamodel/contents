@@ -12,6 +12,7 @@
         <attribute name="strMealThumb" optional="YES" attributeType="String"/>
         <attribute name="strMeasure" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Flag" representedClassName="Flag" syncable="YES" codeGenerationType="class"/>
     <entity name="Meal" representedClassName="Meal" syncable="YES" codeGenerationType="class">
         <attribute name="idMeal" optional="YES" attributeType="String"/>
         <attribute name="isArchived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

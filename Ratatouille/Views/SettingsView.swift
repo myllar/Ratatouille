@@ -17,30 +17,31 @@ struct SettingsView: View {
         NavigationView {
             VStack {
                 List{
-//Section 1
+                    //Section 1
                     Section(header: Text("Redigere databasen (Endre innhold)")) {
-                                                
+                        
                         NavigationLink {
-                            Text("siden form å Redigere landområder")
+                            EditAreaView()
                         } label: {
                             HStack{
                                 Image(systemName: "pencil")
                                 Text("Redigere landområder")
                             }
                         }
-                            
+                        
+                        
                         NavigationLink {
-                            Text("siden form å Redigere kategorier")
+                            EditAreaView()
                         } label: {
                             HStack{
                                 Image(systemName: "pencil")
                                 Text("Redigere kategorier")
                             }
                         }
-                            
+                        
+                        
                         NavigationLink {
-                            Text("siden form å Redigere ingredienser")
-//                         e.g.   SearchView()
+                            EditIngredientView()
                         } label: {
                             HStack{
                                 Image(systemName: "pencil")
@@ -49,7 +50,8 @@ struct SettingsView: View {
                         }
                     }
                     
-//Section 2
+                    
+                    //Section 2
                     Section(header: Text("System-instillinger")) {
                         Toggle(isOn: $isDarkMode, label: {
                             HStack{
@@ -59,9 +61,11 @@ struct SettingsView: View {
                             .preferredColorScheme(isDarkMode ? .dark : .light)
                         })
                     }
-//Section 3
+                    
+                    
+                    //Section 3
                     Section(header: Text("Section 3")) {
-                       NavigationLink {
+                        NavigationLink {
                             ArchiveView()
                         } label: {
                             HStack{
@@ -76,9 +80,9 @@ struct SettingsView: View {
             .navigationTitle("Innstillinger")
         }
     }
+    
+    
 }
-
-
 #Preview {
     SettingsView()
 }
