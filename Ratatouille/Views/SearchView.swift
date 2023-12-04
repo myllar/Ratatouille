@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreData
 
+
 struct SearchView: View {
     
     @Environment(\.managedObjectContext) var viewContext
@@ -17,13 +18,9 @@ struct SearchView: View {
     @State private var selectCategory: String = ""
     @State private var selectArea: String = ""
     @State private var selectIngredient: String = ""
-    
     @State private var setFavorite: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "setFavorite") ?? [])
-    
     @State private var saveMeal: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "saveMeal") ?? [])
-    
     @State private var isFavorite: Bool = false
-    
     
     
     
@@ -71,7 +68,6 @@ struct SearchView: View {
     
     
     
-    
     //          ADD FILTER SEARCH
     
     //          FILTER BY CATEGORY
@@ -99,9 +95,7 @@ struct SearchView: View {
             VStack(alignment: .leading){
                 List (loadFilteredMeals, id: \.idMeal) { mealItems in
                     VStack (alignment: .leading) {
-                        
                         NavigationLink {
-                            
                             ScrollView {
                                 VStack(alignment: .center) {
                                     if let mealImageURL = URL(string: mealItems.strMealThumb) {
@@ -153,28 +147,19 @@ struct SearchView: View {
                                             }
                                             .padding()
                                         }
-                                        
-                                        .foregroundColor(.brandPrimary)
+                                        .foregroundStyle(.brandPrimary)
                                     }
                                 }
                             }
-                            
-//redundant spacer?
-                            Spacer()
-                            
+//                            Spacer()
                         } label: {
         
                             
 //       PREVIEW in List VIEW
                             
                             
-                    
-                            
-                            
-                            
                             VStack {
                                 HStack {
-                                    
                                     HStack {
                                         if let mealImageURL = URL(string: mealItems.strMealThumb) {
                                             AsyncImage(url: mealImageURL) { phase in
@@ -205,17 +190,14 @@ struct SearchView: View {
                                                 }
                                             }
                                         }
-                                        
                                         VStack(alignment: .leading){
                                             Text("\(mealItems.strMeal)").fontWeight(.bold)
                                             Text("\(mealItems.strCategory)")
                                         }
                                     }
                                     
-                                    
                                     Spacer()
                                     
-//      refracture away from button
                                     HStack{
                                         Button(action: {
                                             toggleFavorite(mealItems.idMeal)
@@ -230,8 +212,7 @@ struct SearchView: View {
                                         }
                                     }
                                     
-                                    
-                                    
+
                                     .swipeActions(edge: .leading) {
                                         HStack{
                                             Button(action: {
@@ -245,8 +226,8 @@ struct SearchView: View {
                                             }
                                             .tint(.yellow)
                                         }
-                                        
                                     }
+                                    
                                     
                                     .swipeActions(edge: .trailing) {
                                         HStack{
@@ -258,13 +239,10 @@ struct SearchView: View {
                                             .tint(.green)
                                         }
                                     }
-                                    
-                                    
-                                    
                                 }
                             }
                         }
-                        .foregroundColor(.brandPrimary)
+                        .foregroundStyle(.brandPrimary)
                         .scaledToFill()
                     }
                 }
@@ -272,9 +250,7 @@ struct SearchView: View {
             .navigationTitle("Søk")
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
-                    
                     VStack {
-                        
                         HStack {
                             TextField("Søk matrett navn", text: $searchText)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -294,9 +270,9 @@ struct SearchView: View {
                                 }
                             }
 
-//                            Picker("Filtrer på ingrediens", selection: $selectIngredient) {
-//                                Image(systemName: "carrot").tag("")
-//                            }
+                            Picker("Filtrer på ingrediens", selection: $selectIngredient) {
+                                Image(systemName: "carrot").tag("")
+                            }
 
                         }
                     }
@@ -314,8 +290,6 @@ struct SearchView: View {
     
     
 
-    
-
     func loadMealItems() {
         APIController.getAllMeals { loadedMealItems in
             DispatchQueue.main.async {
@@ -323,6 +297,9 @@ struct SearchView: View {
             }
         }
     }
+    
+    
+    
     
     func toggleFavorite(_ id: String) {
            if setFavorite.contains(id) {
@@ -337,6 +314,8 @@ struct SearchView: View {
            UserDefaults.standard.set(Array(setFavorite), forKey: "setFavorite")
        }
 
+    
+    
     
     func saveMealToMealContext(_ id: String) {
         // Check if the meal with the given ID is already in the "Meal" context
@@ -368,6 +347,7 @@ struct SearchView: View {
             print("Error fetching meal by ID: \(error.localizedDescription)")
         }
     }
+
 
     
     

@@ -1,11 +1,5 @@
-//
-//  EditArea.swift
-//  Ratatouille
-//
-//  Created by oscar student on 02/12/2023.
-//
-
 import SwiftUI
+
 
 struct EditAreaView: View {
     
@@ -21,7 +15,7 @@ struct EditAreaView: View {
     @State private var selectedMealID: String?
     @State private var selectAreaToEdit: String = ""
     @State private var successMessage: String? = nil
-
+    
     
     
     
@@ -37,7 +31,7 @@ struct EditAreaView: View {
                         Text("Matrett: \(selectedMeal?.strMeal ?? "Ingen"), \nOmråde: \(selectedMeal?.strArea ?? "Ingen")")
                         .padding()
                 }
-                
+        
                 TextField("Tast inn nytt område", text: $selectAreaToEdit)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .scaledToFill()
@@ -49,24 +43,16 @@ struct EditAreaView: View {
                 }
             }
             .padding()
-//
-////         ADD FLAG
-//            Section(header: Text("Arkiver landområder")) {
-//                VStack{
-//
-//                }
-//            }
-//            .padding()
- 
         }
+        .foregroundStyle(.brandPrimary)
         .onAppear {
                     selectedMealID = savedMeals.first?.idMeal ?? ""
                 }
-    }//END OF BODY
+    }
     
     
     
-    
+
     private var selectedMeal: Meal? {
         savedMeals.first { $0.idMeal == selectedMealID }
     }

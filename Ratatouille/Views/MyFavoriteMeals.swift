@@ -1,87 +1,6 @@
-//import SwiftUI
-//import CoreData
-//
-//struct MyFavoriteMeals: View {
-//    
-//    @Environment(\.managedObjectContext) private var viewContext
-//    
-//    @FetchRequest(
-//        entity: Meal.entity(),
-//        sortDescriptors: [
-//            NSSortDescriptor(keyPath: \Meal.strMeal, ascending: true)
-//        ]
-//    ) var savedMeals: FetchedResults<Meal>
-//    
-//    
-//    @FetchRequest(
-//        entity: Archived.entity(),
-//        sortDescriptors: [
-//            NSSortDescriptor(keyPath: \Archived.idMeal, ascending: true)
-//        ]
-//    ) var archivedMeals: FetchedResults<Archived>
-//    
-//    
-//    @State private var saveMeal: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "saveMeal") ?? [])
-//
-//    
-//    @State private var setFavorite: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "setFavorite") ?? [])
-//    
-//    
-////    @State private var mealItems: [MealItem] = []/
-//    
-//    
-//    var body: some View {
-//        NavigationView {
-//            if savedMeals.count != 0 {
-//                List(savedMeals, id: \.self) { mealItems in
-//                    NavigationLink {
-//                        ScrollView{
-//                            Text(mealItems.strMeal ?? "Unknown Meal")
-//                        }//END OF DETAILED VIEW
-//                        
-//                    }label: {
-//                        Text(mealItems.strMeal ?? "Unknown Meal")
-//                        HStack{
-//                            Button(action: {
-////                                toggleArchivedStatus(mealItems.idMeal!)
-//                            }) {
-//                                Image(systemName: "archivebox")
-//                            }
-//                            .tint(.red)
-//                        }
-//                    }//END OF PREVIEW VIEW AS LIST ITEM
-//                }
-//            } else {
-//                VStack(alignment: .center){
-//                    Image(systemName: "questionmark.folder")
-//                        .padding()
-//                    Text("Du har ingen favoritter! \nDu kan dobbeltsjekke arkivet under instillinger, eller gå til søk for å lagre nye oppskrifter!")
-//                        .multilineTextAlignment(.center)
-//                }
-//                .padding()
-//                .foregroundStyle(.brandPrimary)
-//            }
-//        }
-//        .navigationTitle("Mine oppskrifter")
-//    }
-//  
-//        func loadSavedMealsItems(_ savedMeals: [Meal]) {
-//            for savedMealItem in savedMeals {
-//                print("\(savedMealItem.idMeal ?? "default value")")
-//            }
-//        }
-//}
-//
-//    #Preview {
-//        MyFavoriteMeals()
-//    }
-
-
-
-
-
 import SwiftUI
 import CoreData
+
 
 struct MyFavoriteMeals: View {
     
@@ -96,23 +15,67 @@ struct MyFavoriteMeals: View {
         ]
     ) var meals: FetchedResults<Meal>
     
+    
+    
     var body: some View {
-        NavigationView {
-            
-                if meals.count != 0 {
-                    List {
-                    
-                        ForEach(meals, id: \.id) { meal in
-                            HStack {
-                                HStack() {
-                                    Text(meal.strMeal ?? "Unknown Meal")
-                                    Text(meal.strCategory ?? "Unknown category")
-                                    Text(meal.strArea ?? "Unknown area")
-//                                    Text(meal.strInstructions ?? "Unknown Instructions")
+        
+        if meals.count != 0 {
+            NavigationStack {
+                List {
+                    ForEach(meals, id: \.id) { meal in
+                        VStack {
+                            NavigationLink {
+                                ScrollView {
+                                    VStack {
+                                        
+                                        VStack(alignment: .center) {
+                                            VStack(alignment: .center) {
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .cornerRadius(50)
+                                                    .frame(width: 250, height: 250)
+                                                
+                                                Text("\(meal.strMeal ?? "404 / ukjent matrett")").fontWeight(.bold)
+                                            }
+                                            .padding()
+                                            
+                                            VStack {
+                                                Text("\(meal.strMeal ?? "404 / ukjent matrett") er en rett som har \(meal.strArea ?? "404 / ukjent område") opphav. Den er ansett som en matrett av typen  \(meal.strCategory ?? "404 / ukjent kategori"). Om du ønsker å lære hva retten inneholder og hvordan den lages, bla deg nedover siden.")
+                                            }
+                                            .padding()
+                                            
+                                            VStack {
+                                                Text("\(meal.strMeal ?? "404 / ukjent matrett") inneholder følgende ingredienser: ").fontWeight(.bold).padding()
+                                                Text("\(meal.strIngredient ?? "404 /  ukjente ingredienser")")
+                                            }
+                                            .padding()
+                                            
+                                            VStack {
+                                                Text("Oppskrift og fremgangsmåte: ").fontWeight(.bold).padding()
+                                                Text("\(meal.strInstructions ?? "404 / ukjente instruksjoner")")
+                                            }
+                                            .padding()
+                                        }
+                                    }
                                 }
-                                
-                                Spacer()
-                                
+                                    
+                                } label: {
+                                    HStack {
+                                        Image(systemName: "photo")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .cornerRadius(100)
+                                            .padding()
+                                            .frame(height: 80)
+                                        
+                                        Text(meal.strMeal ?? "404 / ukjent matrett").fontWeight(.bold)
+                                        VStack {
+                                            Text(meal.strCategory ?? "404 /  ukjent kategori")
+                                            Text(meal.strArea ?? "404 / ukjent område")
+                                        }
+                                    }
+                                    .padding()
                                     .swipeActions(edge: .trailing) {
                                         HStack{
                                             Button(action: {
@@ -123,19 +86,22 @@ struct MyFavoriteMeals: View {
                                             .tint(.red)
                                         }
                                     }
+                                }
                             }
-                        }
-                    }.navigationBarTitle("Mine oppskrifter")
-                }
-                else {
-                    VStack{
-                        Image(systemName: "questionmark.folder")
-                        Text("Ingen matoppskrifter")
+                        }.navigationBarTitle("Mine oppskrifter")
                     }
-                    .padding()
                 }
+            .foregroundStyle(.brandPrimary)
+        } else {
+            VStack{
+                Image(systemName: "questionmark.folder")
+                Text("Ingen matoppskrifter")
+            }
+            .padding()
+            .foregroundStyle(.brandPrimary)
         }
     }
+
 
     
     private func toggleArchivedStatus(_ meal: Meal) {

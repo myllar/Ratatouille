@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreData
 
+
 struct ArchiveView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -15,28 +16,40 @@ struct ArchiveView: View {
     
     
     
-    //    @FetchRequest(
-    //        entity: Meal.entity(),
-    //        sortDescriptors: [
-    //            NSSortDescriptor(keyPath: \Meal.strMeal, ascending: true)
-    //        ]
-    //    ) var savedMeals: FetchedResults<Meal>
-    //
-    //
-    
-    
-    
     var body: some View {
-        NavigationView {
+        if archivedMeals.count != 0 {
+        NavigationStack {
             List {
                 ForEach(archivedMeals, id: \.id) { meal in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(meal.strMeal ?? "Unknown Meal")
-                            Text(meal.strCategory ?? "Unknown category")
-                        }
-                        Spacer()
-                        
+                    VStack {
+                        NavigationLink {
+                            ScrollView {
+                                VStack(alignment: .leading) {
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .cornerRadius(50)
+                                        .frame(width: 250, height: 250)
+                                    Text(meal.strMeal ?? "Unknown Meal")
+                                    Text(meal.strCategory ?? "Unknown category")
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .cornerRadius(100)
+                                    .padding()
+                                    .frame(height: 80)
+                                Text(meal.strMeal ?? "404 / ukjent matrett").fontWeight(.bold)
+                                VStack {
+                                    Text(meal.strCategory ?? "404 /  ukjent kategori")
+                                    Text(meal.strArea ?? "404 / ukjent område")
+                                }
+                            }
+                            .padding()
+                            
                             .swipeActions(edge: .trailing)  {
                                 HStack{
                                     Button(action: {
@@ -53,24 +66,38 @@ struct ArchiveView: View {
                                 
                                 Button(action: {
                                     deleteMeal(meal)
-                                    //                                toggleDeletedStatus(meal)
                                 }) {
-                                    //                            Text("Delete")
                                     Image(systemName: "trash")
                                         .foregroundColor(.red)
-                                    //                            Text(meal.archived ? "Are you sure?" : "Delete")
-                                    //                                .foregroundColor(meal.archived ? .green : .red)
                                 }
                                 .tint(.red)
                             }
+                                    
+                        }
+                        
+                        Spacer()
+                        
+
                     }
                 }
             }
             .navigationBarTitle("Arkiverte retter")
         }
+        
+        } else {
+            VStack{
+                Image(systemName: "questionmark.folder")
+                Text("Ingen matoppskrifter")
+            }
+            .padding()
+            .foregroundStyle(.brandPrimary)
+        }
+
     }
     
-    // Unarchive meal and create a new instance in the Meal entity
+    
+    
+    
     private func unarchiveMeal(_ meal: Archived) {
         let unarchivedMeal = Meal(context: viewContext)
         unarchivedMeal.idMeal = meal.idMeal
@@ -85,7 +112,6 @@ struct ArchiveView: View {
     
     
     
-    // Move archived entity back to favorites
     private func toggleArchivedStatus(_ meal: Archived) {
         if !meal.isArchived {
             unarchiveMeal(meal)
@@ -95,7 +121,10 @@ struct ArchiveView: View {
             print("Error unarchiving meal from Archived entity")
         }
     }
+
     
+    
+        
         private func deleteMeal(_ meal: Archived) {
             viewContext.delete(meal)
             do {
@@ -105,33 +134,10 @@ struct ArchiveView: View {
                 print("Error deleting meal from Archived entity: \(error)")
             }
         }
-    
-        // Move archived entity back to favorites
-        private func toggleDeletedStatus(_ meal: Archived) {
-    //        withAnimation {
-    //            meal.toggle()
-    
-                if !meal.isArchived {
-                    deleteMeal(meal)
-                    print("Successfully deleted")
-                } else {
-                    print("Error deleting meal from Archived entity")
-                }
-    //        }
-        }
-    
-    
-    
-    
-
 
     
-    
-    
-    
+
 }
-
-
 #Preview {
     ArchiveView()
 }

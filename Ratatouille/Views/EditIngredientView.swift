@@ -1,13 +1,8 @@
-//
-//  EditIngredientView.swift
-//  Ratatouille
-//
-//  Created by oscar student on 04/12/2023.
-//
-
 import SwiftUI
 
+
 struct EditIngredientView: View {
+    
     @Environment(\.managedObjectContext) var viewContext
     
     @FetchRequest(
@@ -36,7 +31,6 @@ struct EditIngredientView: View {
                     Text("Matrett: \(selectedMeal?.strMeal ?? "Ingen"), \nKategori: \(selectedMeal?.strCategory ?? "Ingen")")
                         .padding()
                 }
-                
                 TextField("Tast inn ny kategori", text: $selectCategoryToEdit)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .scaledToFill()
@@ -49,10 +43,11 @@ struct EditIngredientView: View {
             }
             .padding()
         }
+        .foregroundStyle(.brandPrimary)
         .onAppear {
                     selectedMealID = savedMeals.first?.idMeal ?? ""
                 }
-    }//END OF BODY
+    }
     
     
     
@@ -70,7 +65,7 @@ struct EditIngredientView: View {
         
 // WHAT TO EDIT:
             mealToUpdate.strCategory = selectCategoryToEdit
-        
+    
             do {
                 try viewContext.save()
                 withAnimation {

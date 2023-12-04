@@ -1,11 +1,5 @@
-//
-//  RatatouilleApp.swift
-//  Ratatouille
-//
-//  Created by oscar student on 13/11/2023.
-//
-
 import SwiftUI
+
 
 @main
 struct RatatouilleApp: App {
@@ -16,8 +10,8 @@ struct RatatouilleApp: App {
         
         WindowGroup {
             VStack {
-                BottomTabView()
-//                SplashView()
+//                BottomTabView()
+                SplashView()
                     .environment(\.managedObjectContext, dataController.container.viewContext)
             }
 //check for changes in app settings

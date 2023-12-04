@@ -1,12 +1,6 @@
-//
-//  DataController.swift
-//  Ratatouille
-//
-//  Created by oscar student on 21/11/2023.
-//
-
 import Foundation
 import CoreData
+
 
 class DataController: ObservableObject {
     let container = NSPersistentContainer(name: "DataModel")

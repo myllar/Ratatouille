@@ -1,11 +1,5 @@
-//
-//  SettingsView.swift
-//  Ratatouille
-//
-//  Created by oscar student on 13/11/2023.
-//
-
 import SwiftUI
+
 
 struct SettingsView: View {
     
@@ -16,7 +10,7 @@ struct SettingsView: View {
         
         NavigationView {
             VStack {
-                List{
+                List {
                     //Section 1
                     Section(header: Text("Redigere databasen (Endre innhold)")) {
                         
@@ -79,6 +73,7 @@ struct SettingsView: View {
             .padding(.bottom)
             .navigationTitle("Innstillinger")
         }
+        .foregroundStyle(.brandPrimary)
     }
     
     
