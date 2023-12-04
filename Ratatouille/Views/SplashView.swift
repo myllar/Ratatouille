@@ -22,6 +22,7 @@ struct SplashView: View {
                             .padding()
                             .scaleEffect(animateScale)
                     }
+                    .ignoresSafeArea()
                 
 //onAppear SplashView
                     .onAppear {
