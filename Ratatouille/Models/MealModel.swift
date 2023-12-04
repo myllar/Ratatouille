@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+
 struct MealItem: Codable, Identifiable {
     let idMeal: String
     let strMeal: String
@@ -9,7 +10,7 @@ struct MealItem: Codable, Identifiable {
     let strInstructions: String
     let strMealThumb: String
     
-    var isFavorite: Bool = false
+    var isFavorite: Bool = true
     var isArchived: Bool = false
     
     let strIngredient: String?
